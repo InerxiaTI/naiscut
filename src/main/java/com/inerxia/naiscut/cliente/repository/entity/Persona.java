@@ -16,8 +16,9 @@ public class Persona {
     @Column(name = "IDENTIFICACION")
     private String identificacion;
     @NotNull
-    @Column(name = "TIPO_IDENTIFICACION_FK")
-    private Integer tipoIdentificaionFk;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TIPO_IDENTIFICACION_FK",insertable = false, updatable = false)
+    private TipoIdentificacion tipoIdentificaionFk;
     @NotNull
     @Column(name = "PRIMER_NOMBRE")
     private String primerNombre;
@@ -62,11 +63,11 @@ public class Persona {
         this.identificacion = identificacion;
     }
 
-    public Integer getTipoIdentificaionFk() {
+    public TipoIdentificacion getTipoIdentificaionFk() {
         return tipoIdentificaionFk;
     }
 
-    public void setTipoIdentificaionFk(Integer tipoIdentificaionFk) {
+    public void setTipoIdentificaionFk(TipoIdentificacion tipoIdentificaionFk) {
         this.tipoIdentificaionFk = tipoIdentificaionFk;
     }
 
