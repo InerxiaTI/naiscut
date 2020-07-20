@@ -1,7 +1,5 @@
 package com.inerxia.naiscut.empleado.repository.entity;
 
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
 
 @Entity
@@ -10,10 +8,10 @@ public class EmpleadoRol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Integer id;
 
-    @NotNull
-    @Column(name = "DESCRIPCION")
+    @Column(name = "DESCRIPCION", nullable = false)
     private String descripcion;
 
     public Integer getId() {
