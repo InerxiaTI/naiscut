@@ -1,17 +1,17 @@
-package com.inerxia.naiscut.cita.repository.entity;
+package com.inerxia.naiscut.empleado.repository.entity;
 
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
-@Table(name = "ESTADO_COMPRA")
-public class EstadoCompra implements Serializable {
+@Table(name = "EMPLEADO_ROL")
+public class EmpleadoRol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @NotNull
     @Column(name = "DESCRIPCION")
     private String descripcion;
@@ -30,13 +30,5 @@ public class EstadoCompra implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    @Override
-    public String toString() {
-        return "EstadoCompra{" +
-                "id=" + id +
-                ", descripcion='" + descripcion + '\'' +
-                '}';
     }
 }
