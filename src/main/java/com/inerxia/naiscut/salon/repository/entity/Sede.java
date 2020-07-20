@@ -1,5 +1,7 @@
 package com.inerxia.naiscut.salon.repository.entity;
 
+import com.inerxia.naiscut.empleado.repository.entity.Empleado;
+
 import javax.persistence.*;
 
 @Table(name = "SEDE")
@@ -17,6 +19,9 @@ public class Sede {
     @Column(name = "CIUDAD")
     private String ciudad;
 
+    @Column(name = "DIRECCION")
+    private String direccion;
+
     @Column(name = "TELEFONO")
     private String telefono;
 
@@ -26,11 +31,16 @@ public class Sede {
     @Column(name = "PRINCIPAL")
     private char principal;
 
-    @Column(name = "ESTADO_SEDE_FK")
-    private char estadoSedeFk;
+    @Column(name = "ESTADO_SEDE")
+    private char estadoSede;
 
-    @Column(name = "ADMINISTRADOR_FK")
-    private Integer administradorFk;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="ADMINISTRADOR_FK", insertable = false, updatable = false)
+    private Empleado administradorFk;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="SALON_FK", insertable = false, updatable = false)
+    private Salon salonFk;
 
     public Integer getId() {
         return id;
@@ -80,19 +90,27 @@ public class Sede {
         this.principal = principal;
     }
 
-    public char getEstadoSedeFk() {
-        return estadoSedeFk;
+    public char getEstadoSede() {
+        return estadoSede;
     }
 
-    public void setEstadoSedeFk(char estadoSedeFk) {
-        this.estadoSedeFk = estadoSedeFk;
+    public void setEstadoSede(char estadoSede) {
+        this.estadoSede = estadoSede;
     }
 
-    public Integer getAdministradorFk() {
+    public Empleado getAdministradorFk() {
         return administradorFk;
     }
 
-    public void setAdministradorFk(Integer administradorFk) {
+    public void setAdministradorFk(Empleado administradorFk) {
         this.administradorFk = administradorFk;
+    }
+
+    public Salon getSalonFk() {
+        return salonFk;
+    }
+
+    public void setSalonFk(Salon salonFk) {
+        this.salonFk = salonFk;
     }
 }
