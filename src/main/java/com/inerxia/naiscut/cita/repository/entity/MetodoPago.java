@@ -11,11 +11,9 @@ public class MetodoPago {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @NotNull
-    @Column(name = "DESCRIPCION")
+    @Column(name = "DESCRIPCION", nullable = false)
     private String descripcion;
-    @NotNull
-    @Column(name = "ESTADO")
+    @Column(name = "ESTADO", nullable = false)
     private char estado;
 
     public Integer getId() {

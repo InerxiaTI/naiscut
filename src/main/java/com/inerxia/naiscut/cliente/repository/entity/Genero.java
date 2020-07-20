@@ -1,12 +1,10 @@
 package com.inerxia.naiscut.cliente.repository.entity;
 
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
 
 @Entity
-@Table(name = "TIPO_IDENTIFICACION")
-public class TipoIdentificacion {
+@Table(name = "GENERO")
+public class Genero {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

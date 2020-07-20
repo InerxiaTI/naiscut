@@ -16,27 +16,22 @@ public class Compra {
     @Column(name = "ID")
     private Integer id;
 
-    @NotNull
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CITA_ID_FK",insertable = false, updatable = false)
+    @JoinColumn(name = "CITA_ID_FK",insertable = false, updatable = false, nullable = false)
     private Cita citaFk;
 
-    @NotNull
-    @Column(name = "VALOR_TOTAL")
+    @Column(name = "VALOR_TOTAL", nullable = false)
     private Double valorTotal;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "METODO_PAGO_FK",insertable = false, updatable = false)
+    @JoinColumn(name = "METODO_PAGO_FK",insertable = false, updatable = false, nullable = false)
     private MetodoPago metodoPagoFk;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ESTADO_COMPRA_FK",insertable = false, updatable = false)
+    @JoinColumn(name = "ESTADO_COMPRA_FK",insertable = false, updatable = false, nullable = false)
     private EstadoCompra estadoCompraFk;
 
-    @NotNull
-    @Column(name = "FECHA_PAGO")
+    @Column(name = "FECHA_PAGO", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")

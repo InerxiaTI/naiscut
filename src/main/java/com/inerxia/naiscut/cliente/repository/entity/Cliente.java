@@ -14,9 +14,8 @@ public class Cliente {
     @Column(name = "ID")
     private Integer id;
 
-    @NotNull
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PERSONA_FK",insertable = false, updatable = false,unique = true)
+    @JoinColumn(name = "PERSONA_FK",insertable = false, updatable = false,unique = true, nullable = false)
     private Persona personaFk;
 
     public Integer getId() {

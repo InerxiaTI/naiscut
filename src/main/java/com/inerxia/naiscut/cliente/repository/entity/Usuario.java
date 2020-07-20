@@ -12,15 +12,12 @@ public class Usuario {
     @Column(name = "ID")
     private Integer id;
 
-    @NotNull
-    @Column(name = "USUARIO")
+    @Column(name = "USUARIO", nullable = false)
     private String usuario;
-    @NotNull
-    @Column(name = "CLAVE")
+    @Column(name = "CLAVE", nullable = false)
     private String clave;
-    @NotNull
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PERSONA_FK",insertable = false, updatable = false,unique = true)
+    @JoinColumn(name = "PERSONA_FK",insertable = false, updatable = false,unique = true, nullable = false)
     private Persona personaFk;
 
     public Integer getId() {

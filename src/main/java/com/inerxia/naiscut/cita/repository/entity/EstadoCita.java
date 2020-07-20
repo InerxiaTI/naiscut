@@ -11,8 +11,7 @@ public class EstadoCita {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
-    @Column(name = "DESCRIPCION")
+    @Column(name = "DESCRIPCION", nullable = false)
     private String descripcion;
 
     public Integer getId() {

@@ -12,40 +12,32 @@ public class Persona {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
-    @Column(name = "IDENTIFICACION")
+    @Column(name = "IDENTIFICACION", nullable = false)
     private String identificacion;
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "TIPO_IDENTIFICACION_FK",insertable = false, updatable = false)
+    @JoinColumn(name = "TIPO_IDENTIFICACION_FK",insertable = false, updatable = false, nullable = false)
     private TipoIdentificacion tipoIdentificaionFk;
-    @NotNull
-    @Column(name = "PRIMER_NOMBRE")
+    @Column(name = "PRIMER_NOMBRE", nullable = false)
     private String primerNombre;
-    @NotNull
-    @Column(name = "SEGUNDO_NOMBRE")
+    @Column(name = "SEGUNDO_NOMBRE", nullable = false)
     private String segundoNombre;
-    @NotNull
-    @Column(name = "PRIMER_APELLIDO")
+    @Column(name = "PRIMER_APELLIDO", nullable = false)
     private String primerApellido;
-    @NotNull
-    @Column(name = "SEGUNDO_NOMBRE")
+    @Column(name = "SEGUNDO_NOMBRE", nullable = false)
     private String segundoApellido;
-    @NotNull
-    @Column(name = "DIRECCION")
+    @Column(name = "DIRECCION", nullable = false)
     private String direccion;
-    @NotNull
-    @Column(name = "CORREO")
+    @Column(name = "CORREO", nullable = false)
     private String correo;
-    @NotNull
-    @Column(name = "TELEFONO_MOVIL")
+    @Column(name = "TELEFONO_MOVIL", nullable = false)
     private String telefonoMovil;
-    @NotNull
-    @Column(name = "TELEFONO_FIJO")
+    @Column(name = "TELEFONO_FIJO", nullable = false)
     private String telefonoFijo;
-    @NotNull
-    @Column(name = "FECHA_NACIMIENTO")
+    @Column(name = "FECHA_NACIMIENTO", nullable = false)
     private String fechaNacimiento;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "GENERO_FK",insertable = false, updatable = false, nullable = false)
+    private Genero generoFk;
 
     public Integer getId() {
         return id;
