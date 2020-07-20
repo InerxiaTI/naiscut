@@ -1,22 +1,40 @@
-package com.inerxia.naiscut.salon.repository.entity;
+package com.inerxia.naiscut.ocupacion.repository.entity;
+
+import com.inerxia.naiscut.cita.repository.entity.Cita;
+import com.inerxia.naiscut.empleado.repository.entity.Empleado;
+import com.inerxia.naiscut.salon.repository.entity.Sede;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Table(name = "HORARIO_SEDE")
+@Table(name = "OCUPACION")
 @Entity
-public class HorarioSede {
+public class Ocupacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Integer id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="EMPLEADO_FK", insertable = false, updatable = false, nullable = false)
+    private Empleado empleadoFk;
+
     @Column(name = "FECHA_HORA_INICIO", nullable = false)
     private LocalDateTime fechaHoraInicio;
 
     @Column(name = "FECHA_HORA_FINAL", nullable = false)
     private LocalDateTime fechaHoraFinal;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="CITA_FK",
+                insertable = false,
+                updatable = false,
+                unique = true)
+    private Cita citaFk;
+
+    @Column(name = "COMENTARIO")
+    private String comentario;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="SEDE_FK", insertable = false, updatable = false, nullable = false)
@@ -28,6 +46,14 @@ public class HorarioSede {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Empleado getEmpleadoFk() {
+        return empleadoFk;
+    }
+
+    public void setEmpleadoFk(Empleado empleadoFk) {
+        this.empleadoFk = empleadoFk;
     }
 
     public LocalDateTime getFechaHoraInicio() {
@@ -44,6 +70,22 @@ public class HorarioSede {
 
     public void setFechaHoraFinal(LocalDateTime fechaHoraFinal) {
         this.fechaHoraFinal = fechaHoraFinal;
+    }
+
+    public Cita getCitaFk() {
+        return citaFk;
+    }
+
+    public void setCitaFk(Cita citaFk) {
+        this.citaFk = citaFk;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
     }
 
     public Sede getSedeFk() {

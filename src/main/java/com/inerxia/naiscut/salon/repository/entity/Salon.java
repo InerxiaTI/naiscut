@@ -11,17 +11,21 @@ public class Salon {
     @Column(name = "ID")
     private Integer id;
 
-    @Column(name = "NIT")
+    @Column(name = "NIT", nullable = false, unique = true)
     private String nit;
 
-    @Column(name = "NOMBRE")
+    @Column(name = "NOMBRE", nullable = false)
     private String nombre;
 
     @Column(name = "LOGO")
     private String logo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="TIPO_SALON_FK", insertable = false, updatable = false)
+    @JoinColumn(name="TIPO_SALON_FK",
+                insertable = false,
+                updatable = false,
+                nullable = false,
+                unique = true)
     private TipoSalon tipoSalonFk;
 
     public Integer getId() {

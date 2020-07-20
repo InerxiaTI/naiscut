@@ -19,27 +19,27 @@ public class Sede {
     @Column(name = "CIUDAD")
     private String ciudad;
 
-    @Column(name = "DIRECCION")
+    @Column(name = "DIRECCION", nullable = false, unique = true)
     private String direccion;
 
-    @Column(name = "TELEFONO")
+    @Column(name = "TELEFONO", nullable = false)
     private String telefono;
 
-    @Column(name = "DOMICILIO")
+    @Column(name = "DOMICILIO", nullable = false)
     private char domicilio;
 
-    @Column(name = "PRINCIPAL")
+    @Column(name = "PRINCIPAL", nullable = false)
     private char principal;
 
-    @Column(name = "ESTADO_SEDE")
+    @Column(name = "ESTADO_SEDE", nullable = false)
     private char estadoSede;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="ADMINISTRADOR_FK", insertable = false, updatable = false)
+    @JoinColumn(name="ADMINISTRADOR_FK", insertable = false, updatable = false, nullable = false)
     private Empleado administradorFk;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="SALON_FK", insertable = false, updatable = false)
+    @JoinColumn(name="SALON_FK", insertable = false, updatable = false, nullable = false)
     private Salon salonFk;
 
     public Integer getId() {
