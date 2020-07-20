@@ -11,7 +11,7 @@ public class TipoSalon {
     @Column(name = "ID")
     private Integer id;
 
-    @Column(name = "DESCRIPCION")
+    @Column(name = "DESCRIPCION", nullable = false)
     private String descripcion;
 
 

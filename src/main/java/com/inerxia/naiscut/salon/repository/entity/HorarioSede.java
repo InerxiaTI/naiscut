@@ -12,14 +12,14 @@ public class HorarioSede {
     @Column(name = "ID")
     private Integer id;
 
-    @Column(name = "FECHA_HORA_INICIO")
+    @Column(name = "FECHA_HORA_INICIO", nullable = false)
     private LocalDateTime fechaHoraInicio;
 
-    @Column(name = "FECHA_HORA_FINAL")
+    @Column(name = "FECHA_HORA_FINAL", nullable = false)
     private LocalDateTime fechaHoraFinal;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="SEDE_FK", insertable = false, updatable = false)
+    @JoinColumn(name="SEDE_FK", insertable = false, updatable = false, nullable = false)
     private Sede sedeFk;
 
     public Integer getId() {
