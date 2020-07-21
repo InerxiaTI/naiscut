@@ -1,52 +1,21 @@
-package com.inerxia.naiscut.model.cliente;
+package com.inerxia.naiscut.facade.cliente.dto;
 
-import javax.persistence.*;
+import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "PERSONA")
-public class Persona {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PersonaDto {
     private Integer id;
-
-    @Column(name = "IDENTIFICACION", nullable = false)
     private String identificacion;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "TIPO_IDENTIFICACION_FK",insertable = false, updatable = false, nullable = false)
-    private TipoIdentificacion tipoIdentificaionFk;
-
-    @Column(name = "PRIMER_NOMBRE", nullable = false)
+    private Integer tipoIdentificacionFk;
     private String primerNombre;
-
-    @Column(name = "SEGUNDO_NOMBRE")
     private String segundoNombre;
-
-    @Column(name = "PRIMER_APELLIDO", nullable = false)
     private String primerApellido;
-
-    @Column(name = "SEGUNDO_APELLIDO")
     private String segundoApellido;
-
-    @Column(name = "DIRECCION", nullable = false)
     private String direccion;
-
-    @Column(name = "CORREO", nullable = false)
     private String correo;
-
-    @Column(name = "TELEFONO_MOVIL", nullable = false)
     private String telefonoMovil;
-
-    @Column(name = "TELEFONO_FIJO")
     private String telefonoFijo;
-
-    @Column(name = "FECHA_NACIMIENTO")
-    private String fechaNacimiento;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "GENERO_FK",insertable = false, updatable = false, nullable = false)
-    private Genero generoFk;
+    private LocalDateTime fechaNacimiento;
+    private Integer generoFk;
 
     public Integer getId() {
         return id;
@@ -64,12 +33,12 @@ public class Persona {
         this.identificacion = identificacion;
     }
 
-    public TipoIdentificacion getTipoIdentificaionFk() {
-        return tipoIdentificaionFk;
+    public Integer getTipoIdentificacionFk() {
+        return tipoIdentificacionFk;
     }
 
-    public void setTipoIdentificaionFk(TipoIdentificacion tipoIdentificaionFk) {
-        this.tipoIdentificaionFk = tipoIdentificaionFk;
+    public void setTipoIdentificacionFk(Integer tipoIdentificacionFk) {
+        this.tipoIdentificacionFk = tipoIdentificacionFk;
     }
 
     public String getPrimerNombre() {
@@ -136,19 +105,38 @@ public class Persona {
         this.telefonoFijo = telefonoFijo;
     }
 
-    public String getFechaNacimiento() {
+    public LocalDateTime getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(String fechaNacimiento) {
+    public void setFechaNacimiento(LocalDateTime fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Genero getGeneroFk() {
+    public Integer getGeneroFk() {
         return generoFk;
     }
 
-    public void setGeneroFk(Genero generoFk) {
+    public void setGeneroFk(Integer generoFk) {
         this.generoFk = generoFk;
+    }
+
+    @Override
+    public String toString() {
+        return "PersonaDto{" +
+                "id=" + id +
+                ", identificacion='" + identificacion + '\'' +
+                ", tipoIdentificacionFk=" + tipoIdentificacionFk +
+                ", primerNombre='" + primerNombre + '\'' +
+                ", segundoNombre='" + segundoNombre + '\'' +
+                ", primerApellido='" + primerApellido + '\'' +
+                ", segundoApellido='" + segundoApellido + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", correo='" + correo + '\'' +
+                ", telefonoMovil='" + telefonoMovil + '\'' +
+                ", telefonoFijo='" + telefonoFijo + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
+                ", generoFk=" + generoFk +
+                '}';
     }
 }
