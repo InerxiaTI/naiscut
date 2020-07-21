@@ -6,7 +6,7 @@ public class SalonDto {
     private String nit;
     private String nombre;
     private String logo;
-    private Integer tipoSalonFk;
+    private TipoSalonDto tipoSalonFk;
 
     public Integer getId() {
         return id;
@@ -40,11 +40,11 @@ public class SalonDto {
         this.logo = logo;
     }
 
-    public Integer getTipoSalonFk() {
+    public TipoSalonDto getTipoSalonFk() {
         return tipoSalonFk;
     }
 
-    public void setTipoSalonFk(Integer tipoSalonFk) {
+    public void setTipoSalonFk(TipoSalonDto tipoSalonFk) {
         this.tipoSalonFk = tipoSalonFk;
     }
 }
