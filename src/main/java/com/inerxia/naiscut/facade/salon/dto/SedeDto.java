@@ -1,5 +1,6 @@
 package com.inerxia.naiscut.facade.salon.dto;
 
+//TODO falta dto de empleado
 public class SedeDto {
 
     private Integer id;
@@ -11,7 +12,7 @@ public class SedeDto {
     private char principal;
     private char estadoSede;
     private Integer administradorFk;
-    private Integer salonFk;
+    private SalonDto salonFk;
 
     public Integer getId() {
         return id;
@@ -85,11 +86,11 @@ public class SedeDto {
         this.administradorFk = administradorFk;
     }
 
-    public Integer getSalonFk() {
+    public SalonDto getSalonFk() {
         return salonFk;
     }
 
-    public void setSalonFk(Integer salonFk) {
+    public void setSalonFk(SalonDto salonFk) {
         this.salonFk = salonFk;
     }
 }

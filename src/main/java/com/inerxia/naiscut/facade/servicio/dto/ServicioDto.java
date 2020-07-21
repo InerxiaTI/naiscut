@@ -1,5 +1,7 @@
 package com.inerxia.naiscut.facade.servicio.dto;
 
+import com.inerxia.naiscut.facade.salon.dto.SedeDto;
+
 public class ServicioDto {
 
     private Integer id;
@@ -8,7 +10,7 @@ public class ServicioDto {
     private Double precio;
     private Integer duracion;
     private char estado;
-    private Integer sedeFk;
+    private SedeDto sedeFk;
 
     public Integer getId() {
         return id;
@@ -58,11 +60,11 @@ public class ServicioDto {
         this.estado = estado;
     }
 
-    public Integer getSedeFk() {
+    public SedeDto getSedeFk() {
         return sedeFk;
     }
 
-    public void setSedeFk(Integer sedeFk) {
+    public void setSedeFk(SedeDto sedeFk) {
         this.sedeFk = sedeFk;
     }
 }

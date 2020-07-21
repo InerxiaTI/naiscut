@@ -7,7 +7,7 @@ public class HorarioSedeDto {
     private Integer id;
     private LocalDateTime fechaHoraInicio;
     private LocalDateTime fechaHoraFinal;
-    private Integer sedeFk;
+    private SedeDto sedeFk;
 
     public Integer getId() {
         return id;
@@ -33,11 +33,11 @@ public class HorarioSedeDto {
         this.fechaHoraFinal = fechaHoraFinal;
     }
 
-    public Integer getSedeFk() {
+    public SedeDto getSedeFk() {
         return sedeFk;
     }
 
-    public void setSedeFk(Integer sedeFk) {
+    public void setSedeFk(SedeDto sedeFk) {
         this.sedeFk = sedeFk;
     }
 }
