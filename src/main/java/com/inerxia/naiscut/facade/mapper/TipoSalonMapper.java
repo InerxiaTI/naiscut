@@ -1,4 +1,4 @@
-package com.inerxia.naiscut.facade.salon.mapper;
+package com.inerxia.naiscut.facade.mapper;
 
 import com.inerxia.naiscut.facade.salon.dto.TipoSalonDto;
 import com.inerxia.naiscut.model.salon.TipoSalon;
