@@ -1,8 +1,9 @@
-package com.inerxia.naiscut.facade.cliente.dto;
+package com.inerxia.naiscut.facade.cita.dto;
 
-public class TipoIdentificacionDto {
+public class MetodoPagoDto {
     private Integer id;
     private String descripcion;
+    private char estado;
 
     public Integer getId() {
         return id;
@@ -20,11 +21,20 @@ public class TipoIdentificacionDto {
         this.descripcion = descripcion;
     }
 
+    public char getEstado() {
+        return estado;
+    }
+
+    public void setEstado(char estado) {
+        this.estado = estado;
+    }
+
     @Override
     public String toString() {
-        return "TipoIdentificacionDto{" +
+        return "MetodoPagoDto{" +
                 "id=" + id +
                 ", descripcion='" + descripcion + '\'' +
+                ", estado=" + estado +
                 '}';
     }
 }

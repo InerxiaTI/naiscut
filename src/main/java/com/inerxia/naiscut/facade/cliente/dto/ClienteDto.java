@@ -2,7 +2,7 @@ package com.inerxia.naiscut.facade.cliente.dto;
 
 public class ClienteDto {
     private Integer id;
-    private Integer personaFk;
+    private PersonaDto personaFk;
 
     public Integer getId() {
         return id;
@@ -12,11 +12,19 @@ public class ClienteDto {
         this.id = id;
     }
 
-    public Integer getPersonaFk() {
+    public PersonaDto getPersonaFk() {
         return personaFk;
     }
 
-    public void setPersonaFk(Integer personaFk) {
+    public void setPersonaFk(PersonaDto personaFk) {
         this.personaFk = personaFk;
+    }
+
+    @Override
+    public String toString() {
+        return "ClienteDto{" +
+                "id=" + id +
+                ", personaFk=" + personaFk.toString() +
+                '}';
     }
 }

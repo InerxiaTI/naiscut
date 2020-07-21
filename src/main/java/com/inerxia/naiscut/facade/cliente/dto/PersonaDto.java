@@ -1,11 +1,12 @@
 package com.inerxia.naiscut.facade.cliente.dto;
 
+
 import java.time.LocalDateTime;
 
 public class PersonaDto {
     private Integer id;
     private String identificacion;
-    private Integer tipoIdentificacionFk;
+    private TipoIdentificacionDto tipoIdentificacionFk;
     private String primerNombre;
     private String segundoNombre;
     private String primerApellido;
@@ -15,7 +16,7 @@ public class PersonaDto {
     private String telefonoMovil;
     private String telefonoFijo;
     private LocalDateTime fechaNacimiento;
-    private Integer generoFk;
+    private GeneroDto generoFk;
 
     public Integer getId() {
         return id;
@@ -33,11 +34,11 @@ public class PersonaDto {
         this.identificacion = identificacion;
     }
 
-    public Integer getTipoIdentificacionFk() {
+    public TipoIdentificacionDto getTipoIdentificacionFk() {
         return tipoIdentificacionFk;
     }
 
-    public void setTipoIdentificacionFk(Integer tipoIdentificacionFk) {
+    public void setTipoIdentificacionFk(TipoIdentificacionDto tipoIdentificacionFk) {
         this.tipoIdentificacionFk = tipoIdentificacionFk;
     }
 
@@ -113,11 +114,11 @@ public class PersonaDto {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Integer getGeneroFk() {
+    public GeneroDto getGeneroFk() {
         return generoFk;
     }
 
-    public void setGeneroFk(Integer generoFk) {
+    public void setGeneroFk(GeneroDto generoFk) {
         this.generoFk = generoFk;
     }
 
@@ -126,7 +127,7 @@ public class PersonaDto {
         return "PersonaDto{" +
                 "id=" + id +
                 ", identificacion='" + identificacion + '\'' +
-                ", tipoIdentificacionFk=" + tipoIdentificacionFk +
+                ", tipoIdentificacionFk=" + tipoIdentificacionFk.toString() +
                 ", primerNombre='" + primerNombre + '\'' +
                 ", segundoNombre='" + segundoNombre + '\'' +
                 ", primerApellido='" + primerApellido + '\'' +
@@ -136,7 +137,7 @@ public class PersonaDto {
                 ", telefonoMovil='" + telefonoMovil + '\'' +
                 ", telefonoFijo='" + telefonoFijo + '\'' +
                 ", fechaNacimiento=" + fechaNacimiento +
-                ", generoFk=" + generoFk +
+                ", generoFk=" + generoFk.toString() +
                 '}';
     }
 }

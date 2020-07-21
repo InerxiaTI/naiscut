@@ -4,7 +4,7 @@ public class UsuarioDto {
     private Integer id;
     private String usuario;
     private String clave;
-    private Integer personaFk;
+    private PersonaDto personaFk;
 
     public Integer getId() {
         return id;
@@ -30,11 +30,11 @@ public class UsuarioDto {
         this.clave = clave;
     }
 
-    public Integer getPersonaFk() {
+    public PersonaDto getPersonaFk() {
         return personaFk;
     }
 
-    public void setPersonaFk(Integer personaFk) {
+    public void setPersonaFk(PersonaDto personaFk) {
         this.personaFk = personaFk;
     }
 
@@ -44,7 +44,7 @@ public class UsuarioDto {
                 "id=" + id +
                 ", usuario='" + usuario + '\'' +
                 ", clave='********"+'\'' +
-                ", personaFk=" + personaFk +
+                ", personaFk=" + personaFk.toString() +
                 '}';
     }
 }

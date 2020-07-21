@@ -1,6 +1,6 @@
-package com.inerxia.naiscut.facade.cliente.dto;
+package com.inerxia.naiscut.facade.cita.dto;
 
-public class TipoIdentificacionDto {
+public class EstadoCompraDto {
     private Integer id;
     private String descripcion;
 
@@ -22,7 +22,7 @@ public class TipoIdentificacionDto {
 
     @Override
     public String toString() {
-        return "TipoIdentificacionDto{" +
+        return "EstadoCompraDto{" +
                 "id=" + id +
                 ", descripcion='" + descripcion + '\'' +
                 '}';
