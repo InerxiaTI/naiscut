@@ -1,17 +1,18 @@
 package com.inerxia.naiscut.facade.ocupacion.dto;
 
+import com.inerxia.naiscut.facade.cita.dto.CitaDto;
+import com.inerxia.naiscut.facade.empleado.dto.EmpleadoDto;
 import com.inerxia.naiscut.facade.salon.dto.SedeDto;
 
 import java.time.LocalDateTime;
 
-//TODO falta dto de empleado, cita
 public class OcupacionDto {
 
     private Integer id;
-    private Integer empleadoFk;
+    private EmpleadoDto empleadoFk;
     private LocalDateTime fechaHoraInicio;
     private LocalDateTime fechaHoraFinal;
-    private Integer citaFk;
+    private CitaDto citaFk;
     private String comentario;
     private SedeDto sedeFk;
 
@@ -21,14 +22,6 @@ public class OcupacionDto {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getEmpleadoFk() {
-        return empleadoFk;
-    }
-
-    public void setEmpleadoFk(Integer empleadoFk) {
-        this.empleadoFk = empleadoFk;
     }
 
     public LocalDateTime getFechaHoraInicio() {
@@ -47,11 +40,19 @@ public class OcupacionDto {
         this.fechaHoraFinal = fechaHoraFinal;
     }
 
-    public Integer getCitaFk() {
+    public EmpleadoDto getEmpleadoFk() {
+        return empleadoFk;
+    }
+
+    public void setEmpleadoFk(EmpleadoDto empleadoFk) {
+        this.empleadoFk = empleadoFk;
+    }
+
+    public CitaDto getCitaFk() {
         return citaFk;
     }
 
-    public void setCitaFk(Integer citaFk) {
+    public void setCitaFk(CitaDto citaFk) {
         this.citaFk = citaFk;
     }
 

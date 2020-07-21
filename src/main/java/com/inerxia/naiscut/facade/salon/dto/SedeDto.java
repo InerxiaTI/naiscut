@@ -1,6 +1,7 @@
 package com.inerxia.naiscut.facade.salon.dto;
 
-//TODO falta dto de empleado
+import com.inerxia.naiscut.facade.empleado.dto.EmpleadoDto;
+
 public class SedeDto {
 
     private Integer id;
@@ -11,7 +12,7 @@ public class SedeDto {
     private char domicilio;
     private char principal;
     private char estadoSede;
-    private Integer administradorFk;
+    private EmpleadoDto administradorFk;
     private SalonDto salonFk;
 
     public Integer getId() {
@@ -78,11 +79,11 @@ public class SedeDto {
         this.estadoSede = estadoSede;
     }
 
-    public Integer getAdministradorFk() {
+    public EmpleadoDto getAdministradorFk() {
         return administradorFk;
     }
 
-    public void setAdministradorFk(Integer administradorFk) {
+    public void setAdministradorFk(EmpleadoDto administradorFk) {
         this.administradorFk = administradorFk;
     }
 
