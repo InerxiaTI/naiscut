@@ -31,9 +31,6 @@ public class Cita {
     private Sede sedeFk;
 
     @Column(name = "FECHA_HORA_INICIO", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime fechaHoraInicio;
 
     @Column(name = "DURACION_TOTAL", nullable = false)
@@ -44,9 +41,6 @@ public class Cita {
     private EstadoCita estadoCitaFk;
 
     @Column(name = "FECHA_CREACION", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime fechaCreacion;
 
     @Column(name = "CONSECUTIVO", nullable = false)

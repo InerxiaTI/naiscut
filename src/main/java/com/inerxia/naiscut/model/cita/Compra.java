@@ -31,9 +31,6 @@ public class Compra {
     private EstadoCompra estadoCompraFk;
 
     @Column(name = "FECHA_PAGO", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime fechaPago;
 
     public Integer getId() {
