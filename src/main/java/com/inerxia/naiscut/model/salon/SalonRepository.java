@@ -2,5 +2,5 @@ package com.inerxia.naiscut.model.salon;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SalonRepository extends JpaRepository<SalonRepository, Integer> {
+public interface SalonRepository extends JpaRepository<Salon, Integer> {
 }
