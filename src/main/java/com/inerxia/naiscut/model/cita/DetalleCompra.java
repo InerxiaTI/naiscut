@@ -5,7 +5,7 @@ import com.inerxia.naiscut.model.servicio.Servicio;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "DETALLE_COMPRA")
+@Table(name = "detalle_compra")
 public class DetalleCompra {
 
     @Id

@@ -3,7 +3,7 @@ package com.inerxia.naiscut.model.cliente;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "TIPO_IDENTIFICACION")
+@Table(name = "tipo_identificacion")
 public class TipoIdentificacion {
 
     @Id

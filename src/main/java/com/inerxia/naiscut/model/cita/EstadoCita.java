@@ -3,7 +3,7 @@ package com.inerxia.naiscut.model.cita;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ESTADO_CITA")
+@Table(name = "estado_cita")
 public class EstadoCita {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -3,7 +3,7 @@ package com.inerxia.naiscut.model.cita;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "METODO_PAGO")
+@Table(name = "metodo_pago")
 public class MetodoPago {
 
     @Id
