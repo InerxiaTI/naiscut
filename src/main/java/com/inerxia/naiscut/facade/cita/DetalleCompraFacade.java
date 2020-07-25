@@ -6,6 +6,7 @@ import com.inerxia.naiscut.facade.cita.dto.DetalleCompraDto;
 import com.inerxia.naiscut.facade.mapper.DetalleCompraMapper;
 import com.inerxia.naiscut.service.cita.DetalleCompraService;
 import org.hibernate.ObjectNotFoundException;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,7 +31,8 @@ public class DetalleCompraFacade extends Facade<DetalleCompraMapper, DetalleComp
     }
 
     @Override
-    public List<DetalleCompraDto> findAll() {
+    public List<DetalleCompraDto> findAll(Pageable pageable) {
         return null;
     }
+
 }

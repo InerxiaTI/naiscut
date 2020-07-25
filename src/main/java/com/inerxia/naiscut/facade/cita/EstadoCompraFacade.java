@@ -6,6 +6,7 @@ import com.inerxia.naiscut.facade.cita.dto.EstadoCompraDto;
 import com.inerxia.naiscut.facade.mapper.EstadoCompraMapper;
 import com.inerxia.naiscut.service.cita.EstadoCompraService;
 import org.hibernate.ObjectNotFoundException;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,7 +30,9 @@ public class EstadoCompraFacade extends Facade<EstadoCompraMapper, EstadoCompraS
     }
 
     @Override
-    public List<EstadoCompraDto> findAll() {
+    public List<EstadoCompraDto> findAll(Pageable pageable) {
         return null;
     }
+
+
 }

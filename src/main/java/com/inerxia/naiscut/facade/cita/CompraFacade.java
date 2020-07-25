@@ -5,6 +5,7 @@ import com.inerxia.naiscut.facade.GeneralFacade;
 import com.inerxia.naiscut.facade.cita.dto.CompraDto;
 import com.inerxia.naiscut.facade.mapper.CompraMapper;
 import com.inerxia.naiscut.service.cita.CompraService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +25,8 @@ public class CompraFacade extends Facade<CompraMapper, CompraService> implements
     }
 
     @Override
-    public List<CompraDto> findAll() {
+    public List<CompraDto> findAll(Pageable pageable) {
         return null;
     }
+
 }

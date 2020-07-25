@@ -6,6 +6,7 @@ import com.inerxia.naiscut.facade.cita.dto.MetodoPagoDto;
 import com.inerxia.naiscut.facade.mapper.MetodoPagoMapper;
 import com.inerxia.naiscut.service.cita.MetodoPagoService;
 import org.hibernate.ObjectNotFoundException;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,7 +31,9 @@ public class MetodoPagoFacade extends Facade<MetodoPagoMapper, MetodoPagoService
     }
 
     @Override
-    public List<MetodoPagoDto> findAll() {
+    public List<MetodoPagoDto> findAll(Pageable pageable) {
         return null;
     }
+
+
 }

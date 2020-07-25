@@ -6,6 +6,7 @@ import com.inerxia.naiscut.facade.cita.dto.CitaDto;
 import com.inerxia.naiscut.facade.mapper.CitaMapper;
 import com.inerxia.naiscut.service.cita.CitaService;
 import org.hibernate.ObjectNotFoundException;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,7 +31,8 @@ public class CitaFacade extends Facade<CitaMapper, CitaService> implements Gener
     }
 
     @Override
-    public List<CitaDto> findAll() {
+    public List<CitaDto> findAll(Pageable pageable) {
         return null;
     }
+
 }
