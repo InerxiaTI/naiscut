@@ -17,12 +17,30 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     private final Logger logger = LoggerFactory.getLogger(ResponseEntityExceptionHandler.class);
 
     @ExceptionHandler(DataNotFoundException.class)
-    public final ResponseEntity<StandardResponse> handleEntityNotFound(HttpServletRequest request, DataNotFoundException ex){
+    public final ResponseEntity<StandardResponse> handleDataNotFound(HttpServletRequest request, DataNotFoundException ex){
         logger.error(request.getRequestURL().toString(), ex);
         return new ResponseEntity<>(new StandardResponse(
                 StandardResponse.EstadoStandardResponse.ERROR,
                 ex.getMensaje()),
                 HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(DataDuplicatedException.class)
+    public final ResponseEntity<StandardResponse> handleDataDuplicated(HttpServletRequest request, DataDuplicatedException ex){
+        logger.error(request.getRequestURL().toString(), ex);
+        return new ResponseEntity<>(new StandardResponse(
+                StandardResponse.EstadoStandardResponse.ERROR,
+                ex.getMensaje()),
+                HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public final ResponseEntity<StandardResponse> handleDataIntegrityViolation(HttpServletRequest request, DataIntegrityViolationException ex){
+        logger.error(request.getRequestURL().toString(), ex);
+        return new ResponseEntity<>(new StandardResponse(
+                StandardResponse.EstadoStandardResponse.ERROR,
+                ex.getMensaje()),
+                HttpStatus.BAD_REQUEST);
     }
 
 }
