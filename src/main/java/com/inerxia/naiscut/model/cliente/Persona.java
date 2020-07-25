@@ -1,9 +1,10 @@
 package com.inerxia.naiscut.model.cliente;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "PERSONA")
+@Table(name = "persona")
 public class Persona {
 
     @Id
@@ -15,7 +16,7 @@ public class Persona {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TIPO_IDENTIFICACION_FK",insertable = false, updatable = false, nullable = false)
-    private TipoIdentificacion tipoIdentificaionFk;
+    private TipoIdentificacion tipoIdentificacionFk;
 
     @Column(name = "PRIMER_NOMBRE", nullable = false)
     private String primerNombre;
@@ -42,7 +43,7 @@ public class Persona {
     private String telefonoFijo;
 
     @Column(name = "FECHA_NACIMIENTO")
-    private String fechaNacimiento;
+    private LocalDateTime fechaNacimiento;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "GENERO_FK",insertable = false, updatable = false, nullable = false)
@@ -64,12 +65,12 @@ public class Persona {
         this.identificacion = identificacion;
     }
 
-    public TipoIdentificacion getTipoIdentificaionFk() {
-        return tipoIdentificaionFk;
+    public TipoIdentificacion getTipoIdentificacionFk() {
+        return tipoIdentificacionFk;
     }
 
-    public void setTipoIdentificaionFk(TipoIdentificacion tipoIdentificaionFk) {
-        this.tipoIdentificaionFk = tipoIdentificaionFk;
+    public void setTipoIdentificacionFk(TipoIdentificacion tipoIdentificacionFk) {
+        this.tipoIdentificacionFk = tipoIdentificacionFk;
     }
 
     public String getPrimerNombre() {
@@ -136,11 +137,11 @@ public class Persona {
         this.telefonoFijo = telefonoFijo;
     }
 
-    public String getFechaNacimiento() {
+    public LocalDateTime getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(String fechaNacimiento) {
+    public void setFechaNacimiento(LocalDateTime fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
