@@ -2,10 +2,17 @@ package com.inerxia.naiscut.facade.servicio.dto;
 
 import com.inerxia.naiscut.facade.empleado.dto.EmpleadoDto;
 
+import javax.validation.constraints.NotNull;
+
 public class EmpleadoServicioDto {
 
+    @NotNull
     private Integer id;
+
+    @NotNull
     private EmpleadoDto empleadoFk;
+
+    @NotNull
     private ServicioDto servicioFk;
 
     public Integer getId() {

@@ -2,14 +2,33 @@ package com.inerxia.naiscut.facade.servicio.dto;
 
 import com.inerxia.naiscut.facade.salon.dto.SedeDto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class ServicioDto {
 
+    @NotNull
     private Integer id;
+
+    @NotNull
+    @Size(max = 50)
     private String nombre;
+
+    @Size(max = 100)
     private String descripcion;
+
+    @NotNull
     private Double precio;
+
+    @NotNull
+    @Size(max = 8)
     private Integer duracion;
+
+    @NotNull
+    @Size(max = 1)
     private char estado;
+
+    @NotNull
     private SedeDto sedeFk;
 
     public Integer getId() {

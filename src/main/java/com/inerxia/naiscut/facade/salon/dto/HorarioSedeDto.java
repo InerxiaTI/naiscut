@@ -1,12 +1,20 @@
 package com.inerxia.naiscut.facade.salon.dto;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public class HorarioSedeDto {
 
+    @NotNull
     private Integer id;
+
+    @NotNull
     private LocalDateTime fechaHoraInicio;
+
+    @NotNull
     private LocalDateTime fechaHoraFinal;
+
+    @NotNull
     private SedeDto sedeFk;
 
     public Integer getId() {

@@ -4,16 +4,29 @@ import com.inerxia.naiscut.facade.cita.dto.CitaDto;
 import com.inerxia.naiscut.facade.empleado.dto.EmpleadoDto;
 import com.inerxia.naiscut.facade.salon.dto.SedeDto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 public class OcupacionDto {
 
+    @NotNull
     private Integer id;
+
+    @NotNull
     private EmpleadoDto empleadoFk;
+
+    @NotNull
     private LocalDateTime fechaHoraInicio;
+
+    @NotNull
     private LocalDateTime fechaHoraFinal;
+
     private CitaDto citaFk;
+
+    @Size(max = 100)
     private String comentario;
+
     private SedeDto sedeFk;
 
     public Integer getId() {
