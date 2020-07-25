@@ -1,10 +1,10 @@
 package com.inerxia.naiscut.exception;
 
-public class EntityNotFoundException extends GeneralRuntimeException{
+public class DataNotFoundException extends GeneralRuntimeException{
 
     private static final long serialVersionUID = 1L;
 
-    public EntityNotFoundException(String mensaje){
+    public DataNotFoundException(String mensaje){
         super(mensaje);
     }
 

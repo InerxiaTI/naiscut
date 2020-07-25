@@ -16,8 +16,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
     private final Logger logger = LoggerFactory.getLogger(ResponseEntityExceptionHandler.class);
 
-    @ExceptionHandler(EntityNotFoundException.class)
-    public final ResponseEntity<StandardResponse> handleEntityNotFound(HttpServletRequest request, EntityNotFoundException ex){
+    @ExceptionHandler(DataNotFoundException.class)
+    public final ResponseEntity<StandardResponse> handleEntityNotFound(HttpServletRequest request, DataNotFoundException ex){
         logger.error(request.getRequestURL().toString(), ex);
         return new ResponseEntity<>(new StandardResponse(
                 StandardResponse.EstadoStandardResponse.ERROR,

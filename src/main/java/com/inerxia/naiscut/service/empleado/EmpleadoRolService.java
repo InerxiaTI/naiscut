@@ -1,6 +1,6 @@
 package com.inerxia.naiscut.service.empleado;
 
-import com.inerxia.naiscut.exception.EntityNotFoundException;
+import com.inerxia.naiscut.exception.DataNotFoundException;
 import com.inerxia.naiscut.model.empleado.EmpleadoRol;
 import com.inerxia.naiscut.model.empleado.EmpleadoRolRepository;
 import org.hibernate.ObjectNotFoundException;
@@ -23,6 +23,6 @@ public class EmpleadoRolService {
             throw new ObjectNotFoundException(id, "exception.objeto_no_encontrado");
         }
         return empleadoRolRepository.findById(id)
-                .orElseThrow(()-> new EntityNotFoundException("exception.entity_not_found.empleado_rol"));
+                .orElseThrow(()-> new DataNotFoundException("exception.data_not_found.empleado_rol"));
     }
 }

@@ -1,6 +1,6 @@
 package com.inerxia.naiscut.service.cita;
 
-import com.inerxia.naiscut.exception.EntityNotFoundException;
+import com.inerxia.naiscut.exception.DataNotFoundException;
 import com.inerxia.naiscut.model.cita.Cita;
 import com.inerxia.naiscut.model.cita.CitaRepository;
 import org.hibernate.ObjectNotFoundException;
@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -24,6 +23,6 @@ public class CitaService {
             throw new ObjectNotFoundException(id, "exception.objeto_no_encontrado");
         }
         return citaRepository.findById(id)
-                .orElseThrow(()-> new EntityNotFoundException("exception.entity_not_found.cita"));
+                .orElseThrow(()-> new DataNotFoundException("exception.data_not_found.cita"));
     }
 }

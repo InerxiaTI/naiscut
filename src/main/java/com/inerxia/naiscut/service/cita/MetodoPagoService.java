@@ -1,6 +1,6 @@
 package com.inerxia.naiscut.service.cita;
 
-import com.inerxia.naiscut.exception.EntityNotFoundException;
+import com.inerxia.naiscut.exception.DataNotFoundException;
 import com.inerxia.naiscut.model.cita.MetodoPago;
 import com.inerxia.naiscut.model.cita.MetodoPagoRepository;
 import org.hibernate.ObjectNotFoundException;
@@ -23,6 +23,6 @@ public class MetodoPagoService {
             throw new ObjectNotFoundException(id, "exception.objeto_no_encontrado");
         }
         return metodoPagoRepository.findById(id)
-                .orElseThrow(()-> new EntityNotFoundException("exception.entity_not_found.metodo_pago"));
+                .orElseThrow(()-> new DataNotFoundException("exception.data_not_found.metodo_pago"));
     }
 }

@@ -1,6 +1,6 @@
 package com.inerxia.naiscut.service.salon;
 
-import com.inerxia.naiscut.exception.EntityNotFoundException;
+import com.inerxia.naiscut.exception.DataNotFoundException;
 import com.inerxia.naiscut.model.salon.Salon;
 import com.inerxia.naiscut.model.salon.SalonRepository;
 import org.hibernate.ObjectNotFoundException;
@@ -23,6 +23,6 @@ public class SalonService {
         if(Objects.isNull(id)){
             throw new ObjectNotFoundException(id, "exception.objeto_no_encontrado");
         }
-        return salonRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("exception.entity_not_found.salon"));
+        return salonRepository.findById(id).orElseThrow(()-> new DataNotFoundException("exception.data_not_found.salon"));
     }
 }
