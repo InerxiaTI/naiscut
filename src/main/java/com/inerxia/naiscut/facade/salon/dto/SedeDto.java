@@ -36,8 +36,18 @@ public class SedeDto {
     @NotNull
     private Integer administradorFk;
 
-    @NotNull
     private SalonDto salonFk;
+
+    @NotNull
+    private Integer idSalonFk;
+
+    public Integer getIdSalonFk() {
+        return idSalonFk;
+    }
+
+    public void setIdSalonFk(Integer idSalonFk) {
+        this.idSalonFk = idSalonFk;
+    }
 
     public Integer getId() {
         return id;

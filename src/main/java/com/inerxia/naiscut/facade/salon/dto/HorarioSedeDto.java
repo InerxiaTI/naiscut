@@ -13,8 +13,18 @@ public class HorarioSedeDto {
     @NotNull
     private LocalDateTime fechaHoraFinal;
 
-    @NotNull
     private SedeDto sedeFk;
+
+    @NotNull
+    private Integer idSedeFk;
+
+    public Integer getIdSedeFk() {
+        return idSedeFk;
+    }
+
+    public void setIdSedeFk(Integer idSedeFk) {
+        this.idSedeFk = idSedeFk;
+    }
 
     public Integer getId() {
         return id;

@@ -20,14 +20,23 @@ public class Salon {
     @Column(name = "LOGO")
     private String logo;
 
+    @Column(name = "TIPO_SALON_FK", nullable = false)
+    private Integer idTipoSalonFk;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="TIPO_SALON_FK",
                 insertable = false,
                 updatable = false,
-                nullable = false,
-                unique = true)
+                nullable = false)
     private TipoSalon tipoSalonFk;
 
+    public Integer getIdTipoSalonFk() {
+        return idTipoSalonFk;
+    }
+
+    public void setIdTipoSalonFk(Integer idTipoSalonFk) {
+        this.idTipoSalonFk = idTipoSalonFk;
+    }
 
     public TipoSalon getTipoSalonFk() {
         return tipoSalonFk;

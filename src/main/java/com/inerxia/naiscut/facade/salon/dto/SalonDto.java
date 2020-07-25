@@ -18,8 +18,18 @@ public class SalonDto {
     @Size(max = 100)
     private String logo;
 
-    @NotNull
     private TipoSalonDto tipoSalonFk;
+
+    @NotNull
+    private Integer idTipoSalonFk;
+
+    public Integer getIdTipoSalonFk() {
+        return idTipoSalonFk;
+    }
+
+    public void setIdTipoSalonFk(Integer idTipoSalonFk) {
+        this.idTipoSalonFk = idTipoSalonFk;
+    }
 
     public Integer getId() {
         return id;

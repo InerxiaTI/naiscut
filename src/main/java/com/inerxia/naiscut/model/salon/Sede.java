@@ -41,6 +41,17 @@ public class Sede {
     @JoinColumn(name="SALON_FK", insertable = false, updatable = false, nullable = false)
     private Salon salonFk;
 
+    @Column(name="SALON_FK",  nullable = false)
+    private Integer idSalonFk;
+
+    public Integer getIdSalonFk() {
+        return idSalonFk;
+    }
+
+    public void setIdSalonFk(Integer idSalonFk) {
+        this.idSalonFk = idSalonFk;
+    }
+
     public Integer getId() {
         return id;
     }

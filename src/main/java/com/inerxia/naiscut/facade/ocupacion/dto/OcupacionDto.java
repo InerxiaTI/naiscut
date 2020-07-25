@@ -12,8 +12,10 @@ public class OcupacionDto {
 
     private Integer id;
 
-    @NotNull
     private EmpleadoDto empleadoFk;
+
+    @NotNull
+    private Integer idEmpleadoFk;
 
     @NotNull
     private LocalDateTime fechaHoraInicio;
@@ -23,10 +25,39 @@ public class OcupacionDto {
 
     private CitaDto citaFk;
 
+    private Integer idCitaFk;
+
     @Size(max = 100)
     private String comentario;
 
     private SedeDto sedeFk;
+
+    @NotNull
+    private Integer idSedeFk;
+
+    public Integer getIdEmpleadoFk() {
+        return idEmpleadoFk;
+    }
+
+    public void setIdEmpleadoFk(Integer idEmpleadoFk) {
+        this.idEmpleadoFk = idEmpleadoFk;
+    }
+
+    public Integer getIdCitaFk() {
+        return idCitaFk;
+    }
+
+    public void setIdCitaFk(Integer idCitaFk) {
+        this.idCitaFk = idCitaFk;
+    }
+
+    public Integer getIdSedeFk() {
+        return idSedeFk;
+    }
+
+    public void setIdSedeFk(Integer idSedeFk) {
+        this.idSedeFk = idSedeFk;
+    }
 
     public Integer getId() {
         return id;

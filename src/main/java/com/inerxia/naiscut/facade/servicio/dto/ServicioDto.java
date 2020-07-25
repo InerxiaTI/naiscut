@@ -27,8 +27,18 @@ public class ServicioDto {
     @Size(max = 1)
     private char estado;
 
-    @NotNull
     private SedeDto sedeFk;
+
+    @NotNull
+    private Integer idSedeFk;
+
+    public Integer getIdSedeFk() {
+        return idSedeFk;
+    }
+
+    public void setIdSedeFk(Integer idSedeFk) {
+        this.idSedeFk = idSedeFk;
+    }
 
     public Integer getId() {
         return id;

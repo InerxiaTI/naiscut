@@ -32,6 +32,17 @@ public class Servicio {
     @JoinColumn(name="SEDE_FK", insertable = false, updatable = false, nullable = false)
     private Sede sedeFk;
 
+    @Column(name = "SEDE_FK", nullable = false)
+    private Integer idSedeFk;
+
+    public Integer getIdSedeFk() {
+        return idSedeFk;
+    }
+
+    public void setIdSedeFk(Integer idSedeFk) {
+        this.idSedeFk = idSedeFk;
+    }
+
     public Integer getId() {
         return id;
     }
