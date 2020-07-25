@@ -7,6 +7,7 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -24,5 +25,13 @@ public class TipoSalonService {
             throw new ObjectNotFoundException(id, "exception.objeto_no_encontrado");
         }
         return tipoSalonRepository.findById(id).orElseThrow(()-> new DataNotFoundException("exception.data_not_found.tipo_salon"));
+    }
+
+    public List<TipoSalon> findAll(){
+        List<TipoSalon> tipoSalonList = tipoSalonRepository.findAll();
+        if (tipoSalonList.isEmpty()){
+            throw new DataNotFoundException("exception.data_not_found.tipo_salon");
+        }
+        return tipoSalonList;
     }
 }

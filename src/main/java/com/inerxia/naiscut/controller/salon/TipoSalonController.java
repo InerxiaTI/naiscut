@@ -25,7 +25,7 @@ public class TipoSalonController {
     }
 
     @GetMapping("/get-por-id/{id}")
-    @ApiOperation(value = "Busca el tipo salon por id", response = List.class)
+    @ApiOperation(value = "Busca el tipo salon por id", response = TipoSalonDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La petición fue procesada con éxito"),
             @ApiResponse(code = 400, message = "La petición es inválida"),
@@ -36,5 +36,17 @@ public class TipoSalonController {
         return ResponseEntity.ok(new StandardResponse<>(
                 StandardResponse.EstadoStandardResponse.OK,
                 tipoSalonDto));
+    }
+
+    @GetMapping("/get-todos")
+    @ApiOperation(value = "Lista todos los tipos de salon", response = List.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La petición fue procesada con éxito"),
+            @ApiResponse(code = 400, message = "La petición es inválida"),
+            @ApiResponse(code = 500, message = "Error del servidor al procesar la respuesta"),
+    })
+    public ResponseEntity<StandardResponse<List<TipoSalonDto>>> findAll(){
+        List<TipoSalonDto> tipoSalonDtoList = tipoSalonFacade.findAll();
+        return ResponseEntity.ok(new StandardResponse<>(StandardResponse.EstadoStandardResponse.OK, tipoSalonDtoList));
     }
 }

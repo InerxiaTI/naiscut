@@ -7,6 +7,7 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -26,5 +27,9 @@ public class TipoSalonFacade {
             throw new ObjectNotFoundException(id, "exception.objeto_no_encontrado");
         }
         return tipoSalonMapper.toDto(tipoSalonService.findById(id));
+    }
+
+    public List<TipoSalonDto> findAll(){
+        return tipoSalonMapper.toDto(tipoSalonService.findAll());
     }
 }
