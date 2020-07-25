@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("citas")
+@RequestMapping("api")
 @Api(value = "Citas endpoint")
 public class CitaController {
 
-    @GetMapping(value = "/pruebaCita/{id}")
+    @GetMapping(value = "/{id}")
     @ApiOperation(value = "Prueba")
     public String pruebaCita(@PathVariable int id){
         return "Cita número"+id;
