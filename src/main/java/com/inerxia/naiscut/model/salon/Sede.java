@@ -4,7 +4,7 @@ import com.inerxia.naiscut.model.empleado.Empleado;
 
 import javax.persistence.*;
 
-@Table(name = "SEDE")
+@Table(name = "sede")
 @Entity
 public class Sede {
 
@@ -112,5 +112,13 @@ public class Sede {
 
     public void setSalonFk(Salon salonFk) {
         this.salonFk = salonFk;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 }

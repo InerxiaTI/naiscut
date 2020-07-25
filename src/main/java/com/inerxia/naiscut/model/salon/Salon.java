@@ -2,7 +2,7 @@ package com.inerxia.naiscut.model.salon;
 
 import javax.persistence.*;
 
-@Table(name = "SALON")
+@Table(name = "salon")
 @Entity
 public class Salon {
 
@@ -27,6 +27,15 @@ public class Salon {
                 nullable = false,
                 unique = true)
     private TipoSalon tipoSalonFk;
+
+
+    public TipoSalon getTipoSalonFk() {
+        return tipoSalonFk;
+    }
+
+    public void setTipoSalonFk(TipoSalon tipoSalonFk) {
+        this.tipoSalonFk = tipoSalonFk;
+    }
 
     public Integer getId() {
         return id;
@@ -60,11 +69,4 @@ public class Salon {
         this.logo = logo;
     }
 
-    public TipoSalon getTipoSalon() {
-        return tipoSalonFk;
-    }
-
-    public void setTipoSalon(TipoSalon tipoSalon) {
-        this.tipoSalonFk = tipoSalon;
-    }
 }

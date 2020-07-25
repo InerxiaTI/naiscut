@@ -2,7 +2,7 @@ package com.inerxia.naiscut.model.salon;
 
 import javax.persistence.*;
 
-@Table(name = "TIPO_SALON")
+@Table(name = "tipo_salon")
 @Entity
 public class TipoSalon {
 

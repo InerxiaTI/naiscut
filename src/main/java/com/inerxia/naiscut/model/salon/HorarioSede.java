@@ -3,7 +3,7 @@ package com.inerxia.naiscut.model.salon;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Table(name = "HORARIO_SEDE")
+@Table(name = "horario_sede")
 @Entity
 public class HorarioSede {
 

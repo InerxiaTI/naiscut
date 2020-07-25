@@ -4,7 +4,7 @@ import com.inerxia.naiscut.model.empleado.Empleado;
 
 import javax.persistence.*;
 
-@Table(name = "EMPLEADO_SERVICIOS")
+@Table(name = "empleado_servicio")
 @Entity
 public class EmpleadoServicio {
 

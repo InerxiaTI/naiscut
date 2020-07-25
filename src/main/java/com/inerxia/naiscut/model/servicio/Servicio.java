@@ -4,7 +4,7 @@ import com.inerxia.naiscut.model.salon.Sede;
 
 import javax.persistence.*;
 
-@Table(name = "SERVICIO")
+@Table(name = "servicio")
 @Entity
 public class Servicio {
 
