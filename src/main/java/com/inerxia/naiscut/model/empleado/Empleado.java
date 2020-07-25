@@ -6,7 +6,7 @@ import com.inerxia.naiscut.model.salon.Sede;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "EMPLEADO")
+@Table(name = "empleado")
 public class Empleado {
 
     @Id

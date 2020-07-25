@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "ESTADO_COMPRA")
+@Table(name = "estado_compra")
 public class EstadoCompra implements Serializable {
 
     @Id

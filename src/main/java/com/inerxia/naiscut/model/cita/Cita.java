@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "CITA")
+@Table(name = "cita")
 public class Cita {
 
     @Id
