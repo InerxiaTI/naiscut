@@ -34,8 +34,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
                 HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    public final ResponseEntity<StandardResponse> handleDataIntegrityViolation(HttpServletRequest request, DataIntegrityViolationException ex){
+    @ExceptionHandler(DataConstraintViolationException.class)
+    public final ResponseEntity<StandardResponse> handleDataIntegrityViolation(HttpServletRequest request, DataConstraintViolationException ex){
         logger.error(request.getRequestURL().toString(), ex);
         return new ResponseEntity<>(new StandardResponse(
                 StandardResponse.EstadoStandardResponse.ERROR,

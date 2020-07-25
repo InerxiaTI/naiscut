@@ -47,6 +47,8 @@ public class TipoSalonController {
     })
     public ResponseEntity<StandardResponse<List<TipoSalonDto>>> findAll(){
         List<TipoSalonDto> tipoSalonDtoList = tipoSalonFacade.findAll();
-        return ResponseEntity.ok(new StandardResponse<>(StandardResponse.EstadoStandardResponse.OK, tipoSalonDtoList));
+        return ResponseEntity.ok(new StandardResponse<>(
+                StandardResponse.EstadoStandardResponse.OK,
+                tipoSalonDtoList));
     }
 }
