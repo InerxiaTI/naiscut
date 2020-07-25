@@ -25,7 +25,7 @@ public class EmpleadoServicioController {
     }
 
     @GetMapping("/get-por-id/{id}")
-    @ApiOperation(value = "Busca el empleado servicio por id", response = List.class)
+    @ApiOperation(value = "Busca el empleado servicio por id", response = EmpleadoServicioDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La petición fue procesada con éxito"),
             @ApiResponse(code = 400, message = "La petición es inválida"),
