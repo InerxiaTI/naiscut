@@ -6,7 +6,6 @@ import javax.validation.constraints.NotNull;
 
 public class EmpleadoServicioDto {
 
-    @NotNull
     private Integer id;
 
     @NotNull

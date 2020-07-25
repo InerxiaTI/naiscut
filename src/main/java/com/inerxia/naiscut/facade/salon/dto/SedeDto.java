@@ -5,7 +5,6 @@ import javax.validation.constraints.Size;
 
 public class SedeDto {
 
-    @NotNull
     private Integer id;
 
     @Size(max = 200)

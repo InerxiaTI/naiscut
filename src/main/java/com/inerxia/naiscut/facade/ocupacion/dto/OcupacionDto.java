@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 
 public class OcupacionDto {
 
-    @NotNull
     private Integer id;
 
     @NotNull

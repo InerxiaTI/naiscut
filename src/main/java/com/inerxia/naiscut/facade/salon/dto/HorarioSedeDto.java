@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 
 public class HorarioSedeDto {
 
-    @NotNull
     private Integer id;
 
     @NotNull

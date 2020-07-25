@@ -7,7 +7,6 @@ import javax.validation.constraints.Size;
 
 public class ServicioDto {
 
-    @NotNull
     private Integer id;
 
     @NotNull

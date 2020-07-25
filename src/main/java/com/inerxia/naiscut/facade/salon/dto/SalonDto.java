@@ -5,7 +5,6 @@ import javax.validation.constraints.Size;
 
 public class SalonDto {
 
-    @NotNull
     private Integer id;
 
     @NotNull
