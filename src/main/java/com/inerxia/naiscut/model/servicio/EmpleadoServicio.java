@@ -1,6 +1,7 @@
 package com.inerxia.naiscut.model.servicio;
 
 import com.inerxia.naiscut.model.empleado.Empleado;
+import io.swagger.models.auth.In;
 
 import javax.persistence.*;
 
@@ -20,6 +21,28 @@ public class EmpleadoServicio {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="SERVICIO_FK", insertable = false, updatable = false, nullable = false)
     private Servicio servicioFk;
+
+    @Column(name = "EMPLEADO_FK", nullable = false)
+    private Integer idEmpleadoFk;
+
+    @Column(name = "SERVICIO_FK", nullable = false)
+    private Integer idServicioFk;
+
+    public Integer getIdEmpleadoFk() {
+        return idEmpleadoFk;
+    }
+
+    public void setIdEmpleadoFk(Integer idEmpleadoFk) {
+        this.idEmpleadoFk = idEmpleadoFk;
+    }
+
+    public Integer getIdServicioFk() {
+        return idServicioFk;
+    }
+
+    public void setIdServicioFk(Integer idServicioFk) {
+        this.idServicioFk = idServicioFk;
+    }
 
     public Integer getId() {
         return id;

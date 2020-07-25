@@ -8,11 +8,31 @@ public class EmpleadoServicioDto {
 
     private Integer id;
 
-    @NotNull
     private EmpleadoDto empleadoFk;
 
-    @NotNull
     private ServicioDto servicioFk;
+
+    @NotNull
+    private Integer idEmpleadoFk;
+
+    @NotNull
+    private Integer idServicioFk;
+
+    public Integer getIdEmpleadoFk() {
+        return idEmpleadoFk;
+    }
+
+    public void setIdEmpleadoFk(Integer idEmpleadoFk) {
+        this.idEmpleadoFk = idEmpleadoFk;
+    }
+
+    public Integer getIdServicioFk() {
+        return idServicioFk;
+    }
+
+    public void setIdServicioFk(Integer idServicioFk) {
+        this.idServicioFk = idServicioFk;
+    }
 
     public Integer getId() {
         return id;
