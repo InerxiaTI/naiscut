@@ -1,10 +1,10 @@
-package com.inerxia.naiscut.facade.cita;
+package com.inerxia.naiscut.facade.empleado;
 
 import com.inerxia.naiscut.facade.Facade;
 import com.inerxia.naiscut.facade.GeneralFacade;
-import com.inerxia.naiscut.facade.cita.dto.CitaDto;
-import com.inerxia.naiscut.facade.mapper.CitaMapper;
-import com.inerxia.naiscut.service.cita.CitaService;
+import com.inerxia.naiscut.facade.empleado.dto.EmpleadoRolDto;
+import com.inerxia.naiscut.facade.mapper.EmpleadoRolMapper;
+import com.inerxia.naiscut.service.empleado.EmpleadoRolService;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,15 +14,15 @@ import java.util.Objects;
 
 @Service
 @Transactional
-public class CitaFacade extends Facade<CitaMapper, CitaService> implements GeneralFacade<CitaDto> {
+public class EmpleadoRolFacade extends Facade<EmpleadoRolMapper, EmpleadoRolService> implements GeneralFacade<EmpleadoRolDto> {
 
 
-    public CitaFacade(CitaMapper mapper, CitaService service) {
+    public EmpleadoRolFacade(EmpleadoRolMapper mapper, EmpleadoRolService service) {
         super(mapper, service);
     }
 
     @Override
-    public CitaDto findById(Integer id) {
+    public EmpleadoRolDto findById(Integer id) {
         if(Objects.isNull(id)){
             throw new ObjectNotFoundException(id, "exception.objeto_no_encontrado");
         }
@@ -30,7 +30,7 @@ public class CitaFacade extends Facade<CitaMapper, CitaService> implements Gener
     }
 
     @Override
-    public List<CitaDto> findAll() {
+    public List<EmpleadoRolDto> findAll() {
         return null;
     }
 }

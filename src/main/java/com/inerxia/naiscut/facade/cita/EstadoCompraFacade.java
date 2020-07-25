@@ -2,9 +2,9 @@ package com.inerxia.naiscut.facade.cita;
 
 import com.inerxia.naiscut.facade.Facade;
 import com.inerxia.naiscut.facade.GeneralFacade;
-import com.inerxia.naiscut.facade.cita.dto.CitaDto;
-import com.inerxia.naiscut.facade.mapper.CitaMapper;
-import com.inerxia.naiscut.service.cita.CitaService;
+import com.inerxia.naiscut.facade.cita.dto.EstadoCompraDto;
+import com.inerxia.naiscut.facade.mapper.EstadoCompraMapper;
+import com.inerxia.naiscut.service.cita.EstadoCompraService;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,15 +14,14 @@ import java.util.Objects;
 
 @Service
 @Transactional
-public class CitaFacade extends Facade<CitaMapper, CitaService> implements GeneralFacade<CitaDto> {
+public class EstadoCompraFacade extends Facade<EstadoCompraMapper, EstadoCompraService> implements GeneralFacade<EstadoCompraDto> {
 
-
-    public CitaFacade(CitaMapper mapper, CitaService service) {
+    public EstadoCompraFacade(EstadoCompraMapper mapper, EstadoCompraService service) {
         super(mapper, service);
     }
 
     @Override
-    public CitaDto findById(Integer id) {
+    public EstadoCompraDto findById(Integer id) {
         if(Objects.isNull(id)){
             throw new ObjectNotFoundException(id, "exception.objeto_no_encontrado");
         }
@@ -30,7 +29,7 @@ public class CitaFacade extends Facade<CitaMapper, CitaService> implements Gener
     }
 
     @Override
-    public List<CitaDto> findAll() {
+    public List<EstadoCompraDto> findAll() {
         return null;
     }
 }

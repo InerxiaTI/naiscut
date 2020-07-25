@@ -8,6 +8,8 @@ import com.inerxia.naiscut.service.cita.CompraService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class CompraFacade extends Facade<CompraMapper, CompraService> implements GeneralFacade<CompraDto> {
@@ -18,6 +20,11 @@ public class CompraFacade extends Facade<CompraMapper, CompraService> implements
 
     @Override
     public CompraDto findById(Integer i) {
+        return null;
+    }
+
+    @Override
+    public List<CompraDto> findAll() {
         return null;
     }
 }
