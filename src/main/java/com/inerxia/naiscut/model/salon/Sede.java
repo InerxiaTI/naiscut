@@ -34,9 +34,8 @@ public class Sede {
     @Column(name = "ESTADO_SEDE", nullable = false)
     private char estadoSede;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="ADMINISTRADOR_FK", insertable = false, updatable = false, nullable = false)
-    private Empleado administradorFk;
+    @Column(name="ADMINISTRADOR_FK",  nullable = false)
+    private Integer administradorFk;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="SALON_FK", insertable = false, updatable = false, nullable = false)
@@ -98,11 +97,11 @@ public class Sede {
         this.estadoSede = estadoSede;
     }
 
-    public Empleado getAdministradorFk() {
+    public Integer getAdministradorFk() {
         return administradorFk;
     }
 
-    public void setAdministradorFk(Empleado administradorFk) {
+    public void setAdministradorFk(Integer administradorFk) {
         this.administradorFk = administradorFk;
     }
 

@@ -12,7 +12,7 @@ public class SedeDto {
     private char domicilio;
     private char principal;
     private char estadoSede;
-    private EmpleadoDto administradorFk;
+    private Integer administradorFk;
     private SalonDto salonFk;
 
     public Integer getId() {
@@ -79,11 +79,11 @@ public class SedeDto {
         this.estadoSede = estadoSede;
     }
 
-    public EmpleadoDto getAdministradorFk() {
+    public Integer getAdministradorFk() {
         return administradorFk;
     }
 
-    public void setAdministradorFk(EmpleadoDto administradorFk) {
+    public void setAdministradorFk(Integer administradorFk) {
         this.administradorFk = administradorFk;
     }
 
