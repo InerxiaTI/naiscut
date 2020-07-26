@@ -1,9 +1,9 @@
 package com.inerxia.naiscut.service.salon;
 
 import com.inerxia.naiscut.exception.DataNotFoundException;
+import com.inerxia.naiscut.exception.ObjectNoEncontradoException;
 import com.inerxia.naiscut.model.salon.TipoSalon;
 import com.inerxia.naiscut.model.salon.TipoSalonRepository;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +22,7 @@ public class TipoSalonService {
 
     public TipoSalon findById(Integer id){
         if(Objects.isNull(id)){
-            throw new ObjectNotFoundException(id, "exception.objeto_no_encontrado");
+            throw new ObjectNoEncontradoException("exception.objeto_no_encontrado");
         }
         return tipoSalonRepository.findById(id).orElseThrow(()-> new DataNotFoundException("exception.data_not_found.tipo_salon"));
     }

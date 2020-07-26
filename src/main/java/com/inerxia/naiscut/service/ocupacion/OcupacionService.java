@@ -1,9 +1,9 @@
 package com.inerxia.naiscut.service.ocupacion;
 
 import com.inerxia.naiscut.exception.DataNotFoundException;
+import com.inerxia.naiscut.exception.ObjectNoEncontradoException;
 import com.inerxia.naiscut.model.ocupacion.Ocupacion;
 import com.inerxia.naiscut.model.ocupacion.OcupacionRepository;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +21,7 @@ public class OcupacionService {
 
     public Ocupacion findById(Integer id){
         if(Objects.isNull(id)){
-            throw new ObjectNotFoundException(id, "exception.objeto_no_encontrado");
+            throw new ObjectNoEncontradoException("exception.objeto_no_encontrado");
         }
         return ocupacionRepository.findById(id).orElseThrow(()-> new DataNotFoundException("exception.data_not_found.ocupacion"));
     }
