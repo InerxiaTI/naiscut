@@ -9,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -32,8 +33,19 @@ public class SedeService {
     }
 
     //TODO BUSCAR POR SALON, BUSCAR POR DIRECCION
+    public List<Sede> buscarPorSalon(Integer idSalonFk){
+        if(Objects.isNull(idSalonFk)){
+            throw new ObjectNoEncontradoException("exception.objeto_no_encontrado");
+        }
+        List<Sede> sedeList = sedeRepository.findByIdSalonFk(idSalonFk);
+        if (sedeList.isEmpty()){
+            throw new DataNotFoundException("exception.data_not_found.sede");
+        }
+        return sedeList;
+    }
 
     public Sede crearSede(Sede sede){
+        //TODO VALIDAR QUE SOLO SEA UNA PRINCIPAL
         if(Objects.nonNull(sede.getId())){
             Optional<Sede> salonOptional = sedeRepository.findById(sede.getId());
             if(salonOptional.isPresent()){
@@ -49,6 +61,7 @@ public class SedeService {
     }
 
     public Sede editarSede(Sede sede){
+        //TODO VALIDAR QUE SOLO SEA UNA PRINCIPAL
         if(Objects.isNull(sede.getId())){
             throw new ObjectNoEncontradoException("exception.objeto_no_encontrado");
         }

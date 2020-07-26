@@ -40,6 +40,20 @@ public class SedeController {
                 sedeDto));
     }
 
+    @GetMapping("/get-por-salon/{idSalonFk}")
+    @ApiOperation(value = "Busca sedes por salon", response = List.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La petición fue procesada con éxito"),
+            @ApiResponse(code = 400, message = "La petición es inválida"),
+            @ApiResponse(code = 500, message = "Error del servidor al procesar la respuesta"),
+    })
+    public ResponseEntity<StandardResponse<List<SedeDto>>> buscarPorSalon(@PathVariable Integer idSalonFk){
+        List<SedeDto> sedeDtoList = sedeFacade.buscarPorSalon(idSalonFk);
+        return ResponseEntity.ok(new StandardResponse<>(
+                StandardResponse.EstadoStandardResponse.OK,
+                sedeDtoList));
+    }
+
     @PostMapping
     @ApiOperation(value = "Crea una sede", response = SedeDto.class)
     @ApiResponses(value = {
