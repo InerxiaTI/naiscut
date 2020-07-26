@@ -20,6 +20,9 @@ public class Ocupacion {
     @JoinColumn(name="EMPLEADO_FK", insertable = false, updatable = false, nullable = false)
     private Empleado empleadoFk;
 
+    @Column(name = "EMPLEADO_FK", nullable = false)
+    private Integer idEmpleadoFk;
+
     @Column(name = "FECHA_HORA_INICIO", nullable = false)
     private LocalDateTime fechaHoraInicio;
 
@@ -33,12 +36,42 @@ public class Ocupacion {
                 unique = true)
     private Cita citaFk;
 
+    @Column(name = "CITA_FK")
+    private Integer idCitaFk;
+
     @Column(name = "COMENTARIO")
     private String comentario;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="SEDE_FK", insertable = false, updatable = false, nullable = false)
     private Sede sedeFk;
+
+    @Column(name = "SEDE_FK", nullable = false)
+    private Integer idSedeFk;
+
+    public Integer getIdEmpleadoFk() {
+        return idEmpleadoFk;
+    }
+
+    public void setIdEmpleadoFk(Integer idEmpleadoFk) {
+        this.idEmpleadoFk = idEmpleadoFk;
+    }
+
+    public Integer getIdCitaFk() {
+        return idCitaFk;
+    }
+
+    public void setIdCitaFk(Integer idCitaFk) {
+        this.idCitaFk = idCitaFk;
+    }
+
+    public Integer getIdSedeFk() {
+        return idSedeFk;
+    }
+
+    public void setIdSedeFk(Integer idSedeFk) {
+        this.idSedeFk = idSedeFk;
+    }
 
     public Integer getId() {
         return id;

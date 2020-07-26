@@ -1,12 +1,35 @@
 package com.inerxia.naiscut.facade.salon.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class SalonDto {
 
     private Integer id;
+
+    @NotNull
+    @Size(max = 100)
     private String nit;
+
+    @NotNull
+    @Size(max = 100)
     private String nombre;
+
+    @Size(max = 100)
     private String logo;
+
     private TipoSalonDto tipoSalonFk;
+
+    @NotNull
+    private Integer idTipoSalonFk;
+
+    public Integer getIdTipoSalonFk() {
+        return idTipoSalonFk;
+    }
+
+    public void setIdTipoSalonFk(Integer idTipoSalonFk) {
+        this.idTipoSalonFk = idTipoSalonFk;
+    }
 
     public Integer getId() {
         return id;

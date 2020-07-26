@@ -1,19 +1,53 @@
 package com.inerxia.naiscut.facade.salon.dto;
 
-import com.inerxia.naiscut.facade.empleado.dto.EmpleadoDto;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class SedeDto {
 
     private Integer id;
+
+    @Size(max = 200)
     private String descripcion;
+
+    @Size(max = 100)
     private String ciudad;
+
+    @NotNull
+    @Size(max = 100)
     private String direccion;
+
+    @NotNull
+    @Size(max = 15)
     private String telefono;
+
+    @NotNull
+    @Size(max = 1)
     private char domicilio;
+
+    @NotNull
+    @Size(max = 1)
     private char principal;
+
+    @NotNull
+    @Size(max = 1)
     private char estadoSede;
+
+    @NotNull
     private Integer administradorFk;
+
     private SalonDto salonFk;
+
+    @NotNull
+    private Integer idSalonFk;
+
+    public Integer getIdSalonFk() {
+        return idSalonFk;
+    }
+
+    public void setIdSalonFk(Integer idSalonFk) {
+        this.idSalonFk = idSalonFk;
+    }
 
     public Integer getId() {
         return id;

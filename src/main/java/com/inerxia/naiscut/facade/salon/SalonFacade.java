@@ -7,6 +7,7 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -16,9 +17,12 @@ public class SalonFacade {
     private SalonMapper salonMapper;
     private SalonService salonService;
 
-    public SalonFacade(SalonMapper salonMapper, SalonService salonService) {
+    private TipoSalonFacade tipoSalonFacade;
+
+    public SalonFacade(SalonMapper salonMapper, SalonService salonService, TipoSalonFacade tipoSalonFacade) {
         this.salonMapper = salonMapper;
         this.salonService = salonService;
+        this.tipoSalonFacade = tipoSalonFacade;
     }
 
     public SalonDto findById(Integer id){
@@ -26,5 +30,19 @@ public class SalonFacade {
             throw new ObjectNotFoundException(id, "exception.objeto_no_encontrado");
         }
         return salonMapper.toDto(salonService.findById(id));
+    }
+
+    public List<SalonDto> findAll(){
+        return salonMapper.toDto(salonService.findAll());
+    }
+
+    public SalonDto crearSalon(SalonDto salonDto){
+        tipoSalonFacade.findById(salonDto.getIdTipoSalonFk());
+        return salonMapper.toDto(salonService.crearSalon(salonMapper.toEntity(salonDto)));
+    }
+
+    public SalonDto editarSalon(SalonDto salonDto){
+        tipoSalonFacade.findById(salonDto.getIdTipoSalonFk());
+        return salonMapper.toDto(salonService.editarSalon(salonMapper.toEntity(salonDto)));
     }
 }
