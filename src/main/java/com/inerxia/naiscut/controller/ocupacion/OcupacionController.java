@@ -1,19 +1,17 @@
 package com.inerxia.naiscut.controller.ocupacion;
 
+import com.inerxia.naiscut.exception.DataConstraintViolationException;
 import com.inerxia.naiscut.facade.ocupacion.OcupacionFacade;
 import com.inerxia.naiscut.facade.ocupacion.dto.OcupacionDto;
-import com.inerxia.naiscut.facade.salon.dto.TipoSalonDto;
 import com.inerxia.naiscut.util.StandardResponse;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/ocupacion")
@@ -37,5 +35,41 @@ public class OcupacionController {
         return ResponseEntity.ok(new StandardResponse<>(
                 StandardResponse.EstadoStandardResponse.OK,
                 ocupacionDto));
+    }
+
+    @PostMapping
+    @ApiOperation(value = "Crea una ocupacion", response = OcupacionDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La petición fue procesada con éxito"),
+            @ApiResponse(code = 400, message = "La petición es inválida"),
+            @ApiResponse(code = 500, message = "Error del servidor al procesar la respuesta"),
+    })
+    public ResponseEntity<StandardResponse<OcupacionDto>> crearOcupacion(
+            @Valid @RequestBody OcupacionDto ocupacionDto){
+        OcupacionDto ocupacionDto1 = ocupacionFacade.crearOcupacion(ocupacionDto);
+        return ResponseEntity.ok(new StandardResponse<>(
+                StandardResponse.EstadoStandardResponse.OK,
+                "ocupacion.crear.exito",
+                ocupacionDto1));
+    }
+
+    @PutMapping
+    @ApiOperation(value = "Edita una ocupacion", response = OcupacionDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La petición fue procesada con éxito"),
+            @ApiResponse(code = 400, message = "La petición es inválida"),
+            @ApiResponse(code = 500, message = "Error del servidor al procesar la respuesta"),
+    })
+    public ResponseEntity<StandardResponse<OcupacionDto>> editarOcupacion(
+            @Valid @RequestBody OcupacionDto ocupacionDto){
+        try {
+            OcupacionDto ocupacionDto1 = ocupacionFacade.editarOcupacion(ocupacionDto);
+            return ResponseEntity.ok(new StandardResponse<>(
+                    StandardResponse.EstadoStandardResponse.OK,
+                    "ocupacion.editar.exito",
+                    ocupacionDto1));
+        }catch (DataIntegrityViolationException e) {
+            throw new DataConstraintViolationException("exception.data_constraint_violation.ocupacion");
+        }
     }
 }
