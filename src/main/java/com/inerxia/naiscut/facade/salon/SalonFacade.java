@@ -1,9 +1,7 @@
 package com.inerxia.naiscut.facade.salon;
 
-import com.inerxia.naiscut.exception.DataNotFoundException;
 import com.inerxia.naiscut.facade.mapper.SalonMapper;
 import com.inerxia.naiscut.facade.salon.dto.SalonDto;
-import com.inerxia.naiscut.facade.salon.dto.TipoSalonDto;
 import com.inerxia.naiscut.service.salon.SalonService;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
@@ -11,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -40,18 +37,12 @@ public class SalonFacade {
     }
 
     public SalonDto crearSalon(SalonDto salonDto){
-        TipoSalonDto tipoSalonDto = tipoSalonFacade.findById(salonDto.getIdTipoSalonFk());
-        if (Objects.isNull(tipoSalonDto)){
-            throw new DataNotFoundException("exception.data_not_found.tipo_salon");
-        }
+        tipoSalonFacade.findById(salonDto.getIdTipoSalonFk());
         return salonMapper.toDto(salonService.crearSalon(salonMapper.toEntity(salonDto)));
     }
 
     public SalonDto editarSalon(SalonDto salonDto){
-        TipoSalonDto tipoSalonDto = tipoSalonFacade.findById(salonDto.getIdTipoSalonFk());
-        if (Objects.isNull(tipoSalonDto)){
-            throw new DataNotFoundException("exception.data_not_found.tipo_salon");
-        }
+        tipoSalonFacade.findById(salonDto.getIdTipoSalonFk());
         return salonMapper.toDto(salonService.editarSalon(salonMapper.toEntity(salonDto)));
     }
 }
