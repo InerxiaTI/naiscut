@@ -4,6 +4,10 @@ import com.inerxia.naiscut.exception.DataNotFoundException;
 import com.inerxia.naiscut.model.cliente.Usuario;
 import com.inerxia.naiscut.model.cliente.UsuarioRepository;
 import org.hibernate.ObjectNotFoundException;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,7 +15,7 @@ import java.util.Objects;
 
 @Service
 @Transactional
-public class UsuarioService {
+public class UsuarioService implements UserDetailsService {
     private UsuarioRepository usuarioRepository;
 
     public UsuarioService(UsuarioRepository usuarioRepository) {
@@ -24,5 +28,12 @@ public class UsuarioService {
         }
         return usuarioRepository.findById(id)
                 .orElseThrow(()-> new DataNotFoundException("exception.data_not_found.usuario"));
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Usuario usuario = usuarioRepository.findByUsuario(username);
+
+        return null;
     }
 }
