@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Service
 @Transactional
@@ -46,7 +48,6 @@ public class SedeService {
         }
     }
 
-
     public Sede editarSede(Sede sede){
         if(Objects.isNull(sede.getId())){
             throw new ObjectNoEncontradoException("exception.objeto_no_encontrado");
@@ -55,16 +56,19 @@ public class SedeService {
         Sede sedeTx = sedeRepository.findById(sede.getId())
                 .orElseThrow(()-> new DataNotFoundException("exception.data_not_found.sede"));
 
-        sedeTx.setIdSalonFk(sede.getIdSalonFk());
-        sedeTx.setDescripcion(sede.getDescripcion());
-        sedeTx.setCiudad(sede.getCiudad());
-        sedeTx.setDireccion(sede.getDireccion());
-        sedeTx.setTelefono(sede.getTelefono());
-        sedeTx.setDomicilio(sede.getDomicilio());
-        sedeTx.setPrincipal(sede.getPrincipal());
-        sedeTx.setAdministradorFk(sede.getAdministradorFk());
-        sedeTx.setEstadoSede(sede.getEstadoSede());
-
-        return sedeTx;
+        try {
+            sedeTx.setIdSalonFk(sede.getIdSalonFk());
+            sedeTx.setDescripcion(sede.getDescripcion());
+            sedeTx.setCiudad(sede.getCiudad());
+            sedeTx.setDireccion(sede.getDireccion());
+            sedeTx.setTelefono(sede.getTelefono());
+            sedeTx.setDomicilio(sede.getDomicilio());
+            sedeTx.setPrincipal(sede.getPrincipal());
+            sedeTx.setAdministradorFk(sede.getAdministradorFk());
+            sedeTx.setEstadoSede(sede.getEstadoSede());
+            return sedeTx;
+        }catch (DataIntegrityViolationException e) {
+            throw new DataConstraintViolationException("exception.data_constraint_violation.sede");
+        }
     }
 }
