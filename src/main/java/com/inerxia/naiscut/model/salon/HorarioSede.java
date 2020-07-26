@@ -1,7 +1,7 @@
 package com.inerxia.naiscut.model.salon;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Table(name = "horario_sede")
 @Entity
@@ -12,11 +12,14 @@ public class HorarioSede {
     @Column(name = "ID")
     private Integer id;
 
-    @Column(name = "FECHA_HORA_INICIO", nullable = false)
-    private LocalDateTime fechaHoraInicio;
+    @Column(name = "DIA", nullable = false)
+    private char dia;
 
-    @Column(name = "FECHA_HORA_FINAL", nullable = false)
-    private LocalDateTime fechaHoraFinal;
+    @Column(name = "HORA_INICIO", nullable = false)
+    private LocalTime horaInicio;
+
+    @Column(name = "HORA_FINAL", nullable = false)
+    private LocalTime horaFinal;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="SEDE_FK", insertable = false, updatable = false, nullable = false)
@@ -41,27 +44,35 @@ public class HorarioSede {
         this.id = id;
     }
 
-    public LocalDateTime getFechaHoraInicio() {
-        return fechaHoraInicio;
-    }
-
-    public void setFechaHoraInicio(LocalDateTime fechaHoraInicio) {
-        this.fechaHoraInicio = fechaHoraInicio;
-    }
-
-    public LocalDateTime getFechaHoraFinal() {
-        return fechaHoraFinal;
-    }
-
-    public void setFechaHoraFinal(LocalDateTime fechaHoraFinal) {
-        this.fechaHoraFinal = fechaHoraFinal;
-    }
-
     public Sede getSedeFk() {
         return sedeFk;
     }
 
     public void setSedeFk(Sede sedeFk) {
         this.sedeFk = sedeFk;
+    }
+
+    public char getDia() {
+        return dia;
+    }
+
+    public void setDia(char dia) {
+        this.dia = dia;
+    }
+
+    public LocalTime getHoraInicio() {
+        return horaInicio;
+    }
+
+    public void setHoraInicio(LocalTime horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public LocalTime getHoraFinal() {
+        return horaFinal;
+    }
+
+    public void setHoraFinal(LocalTime horaFinal) {
+        this.horaFinal = horaFinal;
     }
 }
