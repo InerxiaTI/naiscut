@@ -37,6 +37,20 @@ public class SalonController {
                 salonDto));
     }
 
+    @GetMapping("/get-por-nombre/{nombre}")
+    @ApiOperation(value = "Busca salones por nombre", response = List.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La petición fue procesada con éxito"),
+            @ApiResponse(code = 400, message = "La petición es inválida"),
+            @ApiResponse(code = 500, message = "Error del servidor al procesar la respuesta"),
+    })
+    public ResponseEntity<StandardResponse<List<SalonDto>>> buscarPorNombre(@PathVariable String nombre){
+        List<SalonDto> salonDtoList = salonFacade.buscarPorNombre(nombre);
+        return ResponseEntity.ok(new StandardResponse<>(
+                StandardResponse.EstadoStandardResponse.OK,
+                salonDtoList));
+    }
+
     @GetMapping("/get-todos")
     @ApiOperation(value = "Lista todos los salones", response = List.class)
     @ApiResponses(value = {
