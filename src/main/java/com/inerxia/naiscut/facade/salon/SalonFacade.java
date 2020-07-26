@@ -26,9 +26,6 @@ public class SalonFacade {
     }
 
     public SalonDto findById(Integer id){
-        if(Objects.isNull(id)){
-            throw new ObjectNotFoundException(id, "exception.objeto_no_encontrado");
-        }
         return salonMapper.toDto(salonService.findById(id));
     }
 
