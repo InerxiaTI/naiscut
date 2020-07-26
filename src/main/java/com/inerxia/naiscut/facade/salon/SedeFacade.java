@@ -32,6 +32,10 @@ public class SedeFacade {
         return sedeMapper.toDto(sedeService.buscarPorSalon(idSalonFk));
     }
 
+    public List<SedeDto> buscarPorDireccion(String direccion){
+        return sedeMapper.toDto(sedeService.buscarPorDireccion(direccion));
+    }
+
     public SedeDto crearSede(SedeDto sedeDto){
         salonFacade.findById(sedeDto.getIdSalonFk());
         return sedeMapper.toDto(sedeService.crearSede(sedeMapper.toEntity(sedeDto)));

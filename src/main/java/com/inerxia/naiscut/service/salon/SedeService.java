@@ -44,6 +44,17 @@ public class SedeService {
         return sedeList;
     }
 
+    public List<Sede> buscarPorDireccion(String direccion){
+        if(Objects.isNull(direccion)){
+            throw new ObjectNoEncontradoException("exception.objeto_no_encontrado");
+        }
+        List<Sede> sedeList = sedeRepository.findByDireccionContaining(direccion);
+        if (sedeList.isEmpty()){
+            throw new DataNotFoundException("exception.data_not_found.sede");
+        }
+        return sedeList;
+    }
+
     public Sede crearSede(Sede sede){
         //TODO VALIDAR QUE SOLO SEA UNA PRINCIPAL
         if(Objects.nonNull(sede.getId())){

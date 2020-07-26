@@ -7,4 +7,6 @@ import java.util.List;
 public interface SedeRepository extends JpaRepository<Sede, Integer> {
 
     List<Sede> findByIdSalonFk(Integer idSalonFk);
+
+    List<Sede> findByDireccionContaining(String direcion);
 }

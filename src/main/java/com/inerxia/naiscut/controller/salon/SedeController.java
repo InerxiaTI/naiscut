@@ -54,6 +54,20 @@ public class SedeController {
                 sedeDtoList));
     }
 
+    @GetMapping("/get-por-direccion/{direccion}")
+    @ApiOperation(value = "Busca sedes por direccion", response = List.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La petición fue procesada con éxito"),
+            @ApiResponse(code = 400, message = "La petición es inválida"),
+            @ApiResponse(code = 500, message = "Error del servidor al procesar la respuesta"),
+    })
+    public ResponseEntity<StandardResponse<List<SedeDto>>> buscarPorDireccion(@PathVariable String direccion){
+        List<SedeDto> sedeDtoList = sedeFacade.buscarPorDireccion(direccion);
+        return ResponseEntity.ok(new StandardResponse<>(
+                StandardResponse.EstadoStandardResponse.OK,
+                sedeDtoList));
+    }
+
     @PostMapping
     @ApiOperation(value = "Crea una sede", response = SedeDto.class)
     @ApiResponses(value = {
