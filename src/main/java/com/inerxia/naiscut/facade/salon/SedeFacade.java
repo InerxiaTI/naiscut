@@ -6,6 +6,8 @@ import com.inerxia.naiscut.service.salon.SedeService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class SedeFacade {
@@ -23,6 +25,15 @@ public class SedeFacade {
 
     public SedeDto findById(Integer id){
         return sedeMapper.toDto(sedeService.findById(id));
+    }
+
+    public List<SedeDto> buscarPorSalon(Integer idSalonFk){
+        salonFacade.findById(idSalonFk);
+        return sedeMapper.toDto(sedeService.buscarPorSalon(idSalonFk));
+    }
+
+    public List<SedeDto> buscarPorDireccion(String direccion){
+        return sedeMapper.toDto(sedeService.buscarPorDireccion(direccion));
     }
 
     public SedeDto crearSede(SedeDto sedeDto){

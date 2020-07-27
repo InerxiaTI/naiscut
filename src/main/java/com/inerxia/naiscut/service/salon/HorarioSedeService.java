@@ -1,9 +1,11 @@
 package com.inerxia.naiscut.service.salon;
 
+import com.inerxia.naiscut.exception.DataConstraintViolationException;
 import com.inerxia.naiscut.exception.DataNotFoundException;
 import com.inerxia.naiscut.exception.ObjectNoEncontradoException;
 import com.inerxia.naiscut.model.salon.HorarioSede;
 import com.inerxia.naiscut.model.salon.HorarioSedeRepository;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,7 +38,11 @@ public class HorarioSedeService {
                 throw new DataNotFoundException("exception.data_duplicated.horario_sede");
             }
         }
-        return horarioSedeRepository.save(horarioSede);
+        try {
+            return horarioSedeRepository.save(horarioSede);
+        }catch (DataIntegrityViolationException e) {
+            throw new DataConstraintViolationException("exception.data_constraint_violation.horario_sede");
+        }
     }
 
     public HorarioSede editarHorarioSede(HorarioSede horarioSede){
@@ -47,10 +53,15 @@ public class HorarioSedeService {
         HorarioSede horarioSedeTx = horarioSedeRepository.findById(horarioSede.getId())
                 .orElseThrow(()-> new DataNotFoundException("exception.data_not_found.horario_sede"));
 
-        horarioSedeTx.setFechaHoraInicio(horarioSede.getFechaHoraInicio());
-        horarioSedeTx.setFechaHoraFinal(horarioSede.getFechaHoraFinal());
-        horarioSedeTx.setIdSedeFk(horarioSede.getIdSedeFk());
+        try{
+            horarioSedeTx.setDia(horarioSede.getDia());
+            horarioSedeTx.setHoraInicio(horarioSede.getHoraInicio());
+            horarioSedeTx.setHoraFinal(horarioSede.getHoraFinal());
+            horarioSedeTx.setIdSedeFk(horarioSede.getIdSedeFk());
 
-        return horarioSedeTx;
+            return horarioSedeTx;
+        }catch (DataIntegrityViolationException e) {
+            throw new DataConstraintViolationException("exception.data_constraint_violation.horario_sede");
+        }
     }
 }

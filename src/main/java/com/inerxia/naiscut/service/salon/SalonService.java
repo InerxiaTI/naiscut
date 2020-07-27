@@ -36,7 +36,16 @@ public class SalonService {
         return salonList;
     }
 
-    //TODO BUSCAR POR NOMBRE
+    public List<Salon> buscarPorNombre(String nombre){
+        if(Objects.isNull(nombre)){
+            throw new ObjectNoEncontradoException("exception.objeto_no_encontrado");
+        }
+        List<Salon> salonList = salonRepository.findByNombreContaining(nombre);
+        if (salonList.isEmpty()){
+            throw new DataNotFoundException("exception.data_not_found.salon");
+        }
+        return salonList;
+    }
 
     public Salon crearSalon(Salon salon){
         if(Objects.nonNull(salon.getId())){

@@ -1,11 +1,13 @@
 package com.inerxia.naiscut.controller.salon;
 
+import com.inerxia.naiscut.exception.DataConstraintViolationException;
 import com.inerxia.naiscut.facade.salon.HorarioSedeFacade;
 import com.inerxia.naiscut.facade.salon.dto.HorarioSedeDto;
 import com.inerxia.naiscut.util.StandardResponse;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,10 +60,14 @@ public class HorarioSedeController {
             @ApiResponse(code = 500, message = "Error del servidor al procesar la respuesta"),
     })
     public ResponseEntity<StandardResponse<HorarioSedeDto>> editarHorarioSEde(@Valid @RequestBody HorarioSedeDto horarioSedeDto){
-        HorarioSedeDto horarioSedeDto1 = horarioSedeFacade.editarHorarioSede(horarioSedeDto);
-        return ResponseEntity.ok(new StandardResponse<>(
-                StandardResponse.EstadoStandardResponse.OK,
-                "horario_sede.editar.exito",
-                horarioSedeDto1));
+        try{
+            HorarioSedeDto horarioSedeDto1 = horarioSedeFacade.editarHorarioSede(horarioSedeDto);
+            return ResponseEntity.ok(new StandardResponse<>(
+                    StandardResponse.EstadoStandardResponse.OK,
+                    "horario_sede.editar.exito",
+                    horarioSedeDto1));
+        }catch (DataIntegrityViolationException e){
+            throw new DataConstraintViolationException("exception.data_constraint_violation.horario_sede");
+        }
     }
 }

@@ -29,6 +29,10 @@ public class SalonFacade {
         return salonMapper.toDto(salonService.findById(id));
     }
 
+    public List<SalonDto> buscarPorNombre(String nombre){
+        return salonMapper.toDto(salonService.buscarPorNombre(nombre));
+    }
+
     public List<SalonDto> findAll(){
         return salonMapper.toDto(salonService.findAll());
     }
