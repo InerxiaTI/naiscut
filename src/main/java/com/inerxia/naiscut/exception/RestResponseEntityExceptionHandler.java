@@ -52,4 +52,13 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
                 HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(SedePrincipalExistsException.class)
+    public final ResponseEntity<StandardResponse> handleSedePrincipalExists(HttpServletRequest request, SedePrincipalExistsException ex){
+        logger.error(request.getRequestURL().toString(), ex);
+        return new ResponseEntity<>(new StandardResponse(
+                StandardResponse.EstadoStandardResponse.ERROR,
+                ex.getMensaje()),
+                HttpStatus.BAD_REQUEST);
+    }
+
 }
