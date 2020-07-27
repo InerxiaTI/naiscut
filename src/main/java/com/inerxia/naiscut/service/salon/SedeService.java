@@ -2,6 +2,7 @@ package com.inerxia.naiscut.service.salon;
 
 import com.inerxia.naiscut.exception.DataNotFoundException;
 import com.inerxia.naiscut.exception.ObjectNoEncontradoException;
+import com.inerxia.naiscut.exception.SedePrincipalExistsException;
 import com.inerxia.naiscut.model.salon.Sede;
 import com.inerxia.naiscut.model.salon.SedeRepository;
 import com.inerxia.naiscut.exception.DataConstraintViolationException;
@@ -32,7 +33,6 @@ public class SedeService {
         return sedeRepository.findById(id).orElseThrow(()-> new DataNotFoundException("exception.data_not_found.sede"));
     }
 
-    //TODO BUSCAR POR SALON, BUSCAR POR DIRECCION
     public List<Sede> buscarPorSalon(Integer idSalonFk){
         if(Objects.isNull(idSalonFk)){
             throw new ObjectNoEncontradoException("exception.objeto_no_encontrado");
@@ -55,8 +55,16 @@ public class SedeService {
         return sedeList;
     }
 
+    //todo permitir cambiar la sede principal
+
     public Sede crearSede(Sede sede){
-        //TODO VALIDAR QUE SOLO SEA UNA PRINCIPAL
+        //todo cambiar la validacion por booleano
+        if(sede.getPrincipal()=='1') {
+            Optional<Sede> sedePrincipal = sedeRepository.findByIdSalonFkAndPrincipal(sede.getIdSalonFk(), sede.getPrincipal());
+            if (sedePrincipal.isPresent()) {
+                throw new SedePrincipalExistsException("exception.sede_principal_exists.sede");
+            }
+        }
         if(Objects.nonNull(sede.getId())){
             Optional<Sede> salonOptional = sedeRepository.findById(sede.getId());
             if(salonOptional.isPresent()){
@@ -72,7 +80,6 @@ public class SedeService {
     }
 
     public Sede editarSede(Sede sede){
-        //TODO VALIDAR QUE SOLO SEA UNA PRINCIPAL
         if(Objects.isNull(sede.getId())){
             throw new ObjectNoEncontradoException("exception.objeto_no_encontrado");
         }
@@ -87,7 +94,6 @@ public class SedeService {
             sedeTx.setDireccion(sede.getDireccion());
             sedeTx.setTelefono(sede.getTelefono());
             sedeTx.setDomicilio(sede.getDomicilio());
-            sedeTx.setPrincipal(sede.getPrincipal());
             sedeTx.setAdministradorFk(sede.getAdministradorFk());
             sedeTx.setEstadoSede(sede.getEstadoSede());
             return sedeTx;
