@@ -4,6 +4,7 @@ import com.inerxia.naiscut.model.cliente.Persona;
 import com.inerxia.naiscut.model.salon.Sede;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "empleado")
@@ -32,6 +33,15 @@ public class Empleado {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SEDE_ID_FK",insertable = false, updatable = false, nullable = false)
     private Sede sedeFk;
+
+    @Column(name="ROL_ID_FK",  nullable = false)
+    private Integer idRolFk;
+
+    @Column(name="PERSONA_FK",  nullable = false)
+    private Integer idPersonaFk;
+
+    @Column(name="SEDE_ID_FK",  nullable = false)
+    private Integer idSedeFk;
 
     public Integer getId() {
         return id;
@@ -71,5 +81,29 @@ public class Empleado {
 
     public void setSedeFk(Sede sedeFk) {
         this.sedeFk = sedeFk;
+    }
+
+    public Integer getIdRolFk() {
+        return idRolFk;
+    }
+
+    public void setIdRolFk(Integer idRolFk) {
+        this.idRolFk = idRolFk;
+    }
+
+    public Integer getIdPersonaFk() {
+        return idPersonaFk;
+    }
+
+    public void setIdPersonaFk(Integer idPersonaFk) {
+        this.idPersonaFk = idPersonaFk;
+    }
+
+    public Integer getIdSedeFk() {
+        return idSedeFk;
+    }
+
+    public void setIdSedeFk(Integer idSedeFk) {
+        this.idSedeFk = idSedeFk;
     }
 }

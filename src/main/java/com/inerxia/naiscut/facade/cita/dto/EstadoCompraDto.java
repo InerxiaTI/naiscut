@@ -1,7 +1,13 @@
 package com.inerxia.naiscut.facade.cita.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class EstadoCompraDto {
     private Integer id;
+
+    @NotNull
+    @Size(max = 50)
     private String descripcion;
 
     public Integer getId() {

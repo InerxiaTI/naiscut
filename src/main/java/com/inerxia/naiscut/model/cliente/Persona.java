@@ -1,6 +1,7 @@
 package com.inerxia.naiscut.model.cliente;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
@@ -49,6 +50,12 @@ public class Persona {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "GENERO_FK",insertable = false, updatable = false, nullable = false)
     private Genero generoFk;
+
+    @Column(name="TIPO_IDENTIFICACION_FK",  nullable = false)
+    private Integer idTipoIdentificacionFk;
+
+    @Column(name="GENERO_FK",  nullable = false)
+    private Integer idGeneroFk;
 
     public Integer getId() {
         return id;
@@ -152,5 +159,21 @@ public class Persona {
 
     public void setGeneroFk(Genero generoFk) {
         this.generoFk = generoFk;
+    }
+
+    public Integer getIdTipoIdentificacionFk() {
+        return idTipoIdentificacionFk;
+    }
+
+    public void setIdTipoIdentificacionFk(Integer idTipoIdentificacionFk) {
+        this.idTipoIdentificacionFk = idTipoIdentificacionFk;
+    }
+
+    public Integer getIdGeneroFk() {
+        return idGeneroFk;
+    }
+
+    public void setIdGeneroFk(Integer idGeneroFk) {
+        this.idGeneroFk = idGeneroFk;
     }
 }

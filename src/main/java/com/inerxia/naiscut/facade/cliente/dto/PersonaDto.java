@@ -1,22 +1,48 @@
 package com.inerxia.naiscut.facade.cliente.dto;
 
 
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 public class PersonaDto {
     private Integer id;
+
+    @NotNull
+    @Size(max = 100)
     private String identificacion;
     private TipoIdentificacionDto tipoIdentificacionFk;
+
+    @NotNull
+    @Size(max = 50)
     private String primerNombre;
+    @Size(max = 50)
     private String segundoNombre;
+    @NotNull
+    @Size(max = 50)
     private String primerApellido;
+    @Size(max = 50)
     private String segundoApellido;
+    @Size(max = 30)
     private String direccion;
+    @NotNull
+    @Size(max = 100)
     private String correo;
+    @NotNull
+    @Size(max = 12)
     private String telefonoMovil;
+    @Size(max = 10)
     private String telefonoFijo;
+
     private LocalDateTime fechaNacimiento;
+
     private GeneroDto generoFk;
+
+    @NotNull
+    private Integer idTipoIdentificacionFk;
+    @NotNull
+    private Integer idGeneroFk;
 
     public Integer getId() {
         return id;
@@ -120,6 +146,22 @@ public class PersonaDto {
 
     public void setGeneroFk(GeneroDto generoFk) {
         this.generoFk = generoFk;
+    }
+
+    public Integer getIdTipoIdentificacionFk() {
+        return idTipoIdentificacionFk;
+    }
+
+    public void setIdTipoIdentificacionFk(Integer idTipoIdentificacionFk) {
+        this.idTipoIdentificacionFk = idTipoIdentificacionFk;
+    }
+
+    public Integer getIdGeneroFk() {
+        return idGeneroFk;
+    }
+
+    public void setIdGeneroFk(Integer idGeneroFk) {
+        this.idGeneroFk = idGeneroFk;
     }
 
     @Override

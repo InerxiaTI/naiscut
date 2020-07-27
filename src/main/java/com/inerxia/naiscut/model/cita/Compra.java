@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
@@ -32,6 +33,15 @@ public class Compra {
 
     @Column(name = "FECHA_PAGO", nullable = false)
     private LocalDateTime fechaPago;
+
+    @Column(name = "CITA_ID_FK", nullable = false)
+    private Integer idCitaFk;
+
+    @Column(name = "METODO_PAGO_FK", nullable = false)
+    private Integer idMetodoPagoFk;
+
+    @Column(name = "ESTADO_COMPRA_FK", nullable = false)
+    private Integer idEstadoCompraFk;
 
     public Integer getId() {
         return id;
@@ -79,5 +89,29 @@ public class Compra {
 
     public void setFechaPago(LocalDateTime fechaPago) {
         this.fechaPago = fechaPago;
+    }
+
+    public Integer getIdCitaFk() {
+        return idCitaFk;
+    }
+
+    public void setIdCitaFk(Integer idCitaFk) {
+        this.idCitaFk = idCitaFk;
+    }
+
+    public Integer getIdMetodoPagoFk() {
+        return idMetodoPagoFk;
+    }
+
+    public void setIdMetodoPagoFk(Integer idMetodoPagoFk) {
+        this.idMetodoPagoFk = idMetodoPagoFk;
+    }
+
+    public Integer getIdEstadoCompraFk() {
+        return idEstadoCompraFk;
+    }
+
+    public void setIdEstadoCompraFk(Integer idEstadoCompraFk) {
+        this.idEstadoCompraFk = idEstadoCompraFk;
     }
 }

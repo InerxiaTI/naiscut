@@ -3,6 +3,7 @@ package com.inerxia.naiscut.model.cita;
 import com.inerxia.naiscut.model.servicio.Servicio;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "detalle_compra")
@@ -24,7 +25,13 @@ public class DetalleCompra {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "COMPRA_FK",insertable = false, updatable = false, nullable = false)
-    private Compra comparaFk;
+    private Compra compraFk;
+
+    @Column(name="SERVICIO_ID_FK",  nullable = false)
+    private Integer idServicioFk;
+
+    @Column(name="COMPRA_FK",  nullable = false)
+    private Integer idCompraFk;
 
     public Integer getId() {
         return id;
@@ -58,11 +65,28 @@ public class DetalleCompra {
         this.duracion = duracion;
     }
 
-    public Compra getComparaFk() {
-        return comparaFk;
+    public Compra getCompraFk() {
+        return compraFk;
     }
 
-    public void setComparaFk(Compra comparaFk) {
-        this.comparaFk = comparaFk;
+    public void setCompraFk(Compra compraFk) {
+        this.compraFk = compraFk;
     }
+
+    public Integer getIdServicioFk() {
+        return idServicioFk;
+    }
+
+    public void setIdServicioFk(Integer idServicioFk) {
+        this.idServicioFk = idServicioFk;
+    }
+
+    public Integer getIdCompraFk() {
+        return idCompraFk;
+    }
+
+    public void setIdCompraFk(Integer idCompraFk) {
+        this.idCompraFk = idCompraFk;
+    }
+
 }

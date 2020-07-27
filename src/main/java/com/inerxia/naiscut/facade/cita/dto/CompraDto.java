@@ -1,14 +1,30 @@
 package com.inerxia.naiscut.facade.cita.dto;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public class CompraDto {
     private Integer id;
     private CitaDto citaFk;
+
+    @NotNull
     private Double valorTotal;
+
     private MetodoPagoDto metodoPagoFk;
     private EstadoCompraDto estadoCompraFk;
+
+    @NotNull
     private LocalDateTime fechaPago;
+
+    @NotNull
+    private Integer idCitaFk;
+
+    @NotNull
+    private Integer idMetodoPagoFk;
+
+    @NotNull
+    private Integer idEstadoCompraFk;
+
 
     public Integer getId() {
         return id;
@@ -56,6 +72,30 @@ public class CompraDto {
 
     public void setFechaPago(LocalDateTime fechaPago) {
         this.fechaPago = fechaPago;
+    }
+
+    public Integer getIdCitaFk() {
+        return idCitaFk;
+    }
+
+    public void setIdCitaFk(Integer idCitaFk) {
+        this.idCitaFk = idCitaFk;
+    }
+
+    public Integer getIdMetodoPagoFk() {
+        return idMetodoPagoFk;
+    }
+
+    public void setIdMetodoPagoFk(Integer idMetodoPagoFk) {
+        this.idMetodoPagoFk = idMetodoPagoFk;
+    }
+
+    public Integer getIdEstadoCompraFk() {
+        return idEstadoCompraFk;
+    }
+
+    public void setIdEstadoCompraFk(Integer idEstadoCompraFk) {
+        this.idEstadoCompraFk = idEstadoCompraFk;
     }
 
     @Override
