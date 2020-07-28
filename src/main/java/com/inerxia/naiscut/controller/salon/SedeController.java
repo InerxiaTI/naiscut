@@ -2,6 +2,7 @@ package com.inerxia.naiscut.controller.salon;
 
 import com.inerxia.naiscut.exception.DataConstraintViolationException;
 import com.inerxia.naiscut.facade.salon.SedeFacade;
+import com.inerxia.naiscut.facade.salon.dto.RegistroSalonDto;
 import com.inerxia.naiscut.facade.salon.dto.SedeDto;
 import com.inerxia.naiscut.util.StandardResponse;
 import io.swagger.annotations.ApiOperation;
@@ -64,6 +65,21 @@ public class SedeController {
         return ResponseEntity.ok(new StandardResponse<>(
                 StandardResponse.EstadoStandardResponse.OK,
                 sedeDtoList));
+    }
+
+    @PostMapping("/registrar-salon")
+    @ApiOperation(value = "Registra un salon y una sede principal", response = RegistroSalonDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La petición fue procesada con éxito"),
+            @ApiResponse(code = 400, message = "La petición es inválida"),
+            @ApiResponse(code = 500, message = "Error del servidor al procesar la respuesta"),
+    })
+    public ResponseEntity<StandardResponse<RegistroSalonDto>> registrarSalon(@Valid @RequestBody RegistroSalonDto registroSalonDto){
+        RegistroSalonDto registroSalonDto1 = sedeFacade.registrarSalon(registroSalonDto);
+        return ResponseEntity.ok(new StandardResponse<>(
+                StandardResponse.EstadoStandardResponse.OK,
+                "registro_salon.crear.exito",
+                registroSalonDto1));
     }
 
     @PostMapping
