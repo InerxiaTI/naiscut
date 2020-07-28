@@ -85,6 +85,8 @@ public class SedeService {
         }
         try {
             sede.setPrincipal(DataTypeHandler.charToBoolean(sede.getPrincipal()) ? '1' : '0');
+            sede.setDomicilio(DataTypeHandler.charToBoolean(sede.getDomicilio()) ? '1' : '0');
+            sede.setEstadoSede(DataTypeHandler.charToBoolean(sede.getEstadoSede()) ? '1' : '0');
             return sedeRepository.save(sede);
         }catch (DataIntegrityViolationException e) {
             throw new DataConstraintViolationException("exception.data_constraint_violation.sede");
@@ -105,9 +107,9 @@ public class SedeService {
             sedeTx.setCiudad(sede.getCiudad());
             sedeTx.setDireccion(sede.getDireccion());
             sedeTx.setTelefono(sede.getTelefono());
-            sedeTx.setDomicilio(sede.getDomicilio());
             sedeTx.setAdministradorFk(sede.getAdministradorFk());
-            sedeTx.setEstadoSede(sede.getEstadoSede());
+            sedeTx.setDomicilio(DataTypeHandler.charToBoolean(sede.getDomicilio()) ? '1' : '0');
+            sedeTx.setEstadoSede(DataTypeHandler.charToBoolean(sede.getEstadoSede()) ? '1' : '0');
             return sedeTx;
         }catch (DataIntegrityViolationException e) {
             throw new DataConstraintViolationException("exception.data_constraint_violation.sede");

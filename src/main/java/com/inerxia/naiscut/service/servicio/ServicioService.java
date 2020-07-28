@@ -4,6 +4,7 @@ import com.inerxia.naiscut.exception.DataNotFoundException;
 import com.inerxia.naiscut.exception.ObjectNoEncontradoException;
 import com.inerxia.naiscut.model.servicio.Servicio;
 import com.inerxia.naiscut.model.servicio.ServicioRepository;
+import com.inerxia.naiscut.util.DataTypeHandler;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,6 +37,7 @@ public class ServicioService {
                 throw new DataNotFoundException("exception.data_duplicated.servicio");
             }
         }
+        servicio.setEstado(DataTypeHandler.charToBoolean(servicio.getEstado()) ? '1' : '0');
         return servicioRepository.save(servicio);
     }
 
@@ -51,7 +53,7 @@ public class ServicioService {
         servicioTx.setDescripcion(servicio.getDescripcion());
         servicioTx.setPrecio(servicio.getPrecio());
         servicioTx.setDuracion(servicio.getDuracion());
-        servicioTx.setEstado(servicio.getEstado());
+        servicioTx.setEstado(DataTypeHandler.charToBoolean(servicio.getEstado()) ? '1' : '0');
         servicioTx.setIdSedeFk(servicio.getIdSedeFk());
 
         return servicioTx;
