@@ -36,6 +36,10 @@ public class SedeFacade {
         return sedeMapper.toDto(sedeService.buscarPorDireccion(direccion));
     }
 
+    public SedeDto cambiarSedePrincipal(Integer idSede){
+        return sedeMapper.toDto(sedeService.cambiarSedePrincipal(idSede));
+    }
+
     public SedeDto crearSede(SedeDto sedeDto){
         salonFacade.findById(sedeDto.getIdSalonFk());
         return sedeMapper.toDto(sedeService.crearSede(sedeMapper.toEntity(sedeDto)));

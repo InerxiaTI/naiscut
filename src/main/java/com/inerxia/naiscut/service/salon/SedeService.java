@@ -13,8 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @Service
 @Transactional
@@ -55,7 +53,21 @@ public class SedeService {
         return sedeList;
     }
 
-    //todo permitir cambiar la sede principal
+    public Sede cambiarSedePrincipal(Integer idSede){
+        if(Objects.isNull(idSede)){
+            throw new ObjectNoEncontradoException("exception.objeto_no_encontrado");
+        }
+        Sede futuraSedePrincipal = sedeRepository.findById(idSede)
+                .orElseThrow(()-> new DataNotFoundException("exception.data_not_found.sede"));
+
+        Optional<Sede> sedePrincipal = sedeRepository.findByIdSalonFkAndPrincipal(futuraSedePrincipal.getIdSalonFk(), '1');
+        if(sedePrincipal.isPresent()) {
+            Sede actualSedePrincipal = sedePrincipal.get();
+            actualSedePrincipal.setPrincipal('0');
+            futuraSedePrincipal.setPrincipal('1');
+        }
+        return futuraSedePrincipal;
+    }
 
     public Sede crearSede(Sede sede){
         //todo cambiar la validacion por booleano
