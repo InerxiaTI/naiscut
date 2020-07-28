@@ -6,6 +6,7 @@ import com.inerxia.naiscut.exception.SedePrincipalExistsException;
 import com.inerxia.naiscut.model.salon.Sede;
 import com.inerxia.naiscut.model.salon.SedeRepository;
 import com.inerxia.naiscut.exception.DataConstraintViolationException;
+import com.inerxia.naiscut.util.DataTypeHandler;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,21 +71,20 @@ public class SedeService {
     }
 
     public Sede crearSede(Sede sede){
-        //todo cambiar la validacion por booleano
-        if(sede.getPrincipal()=='1') {
-            Optional<Sede> sedePrincipal = sedeRepository.findByIdSalonFkAndPrincipal(sede.getIdSalonFk(), sede.getPrincipal());
-            if (sedePrincipal.isPresent()) {
-                throw new SedePrincipalExistsException("exception.sede_principal_exists.sede");
-            }
-        }
         if(Objects.nonNull(sede.getId())){
             Optional<Sede> salonOptional = sedeRepository.findById(sede.getId());
             if(salonOptional.isPresent()){
                 throw new DataNotFoundException("exception.data_duplicated.sede");
             }
         }
-
+        if(DataTypeHandler.charToBoolean(sede.getPrincipal())){
+            Optional<Sede> sedePrincipal = sedeRepository.findByIdSalonFkAndPrincipal(sede.getIdSalonFk(), sede.getPrincipal());
+            if (sedePrincipal.isPresent()) {
+                throw new SedePrincipalExistsException("exception.sede_principal_exists.sede");
+            }
+        }
         try {
+            sede.setPrincipal(DataTypeHandler.charToBoolean(sede.getPrincipal()) ? '1' : '0');
             return sedeRepository.save(sede);
         }catch (DataIntegrityViolationException e) {
             throw new DataConstraintViolationException("exception.data_constraint_violation.sede");
