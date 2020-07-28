@@ -23,6 +23,17 @@ public class SalonDto {
     @NotNull
     private Integer idTipoSalonFk;
 
+    @NotNull
+    private Integer administrador_total_fk;
+
+    public Integer getAdministrador_total_fk() {
+        return administrador_total_fk;
+    }
+
+    public void setAdministrador_total_fk(Integer administrador_total_fk) {
+        this.administrador_total_fk = administrador_total_fk;
+    }
+
     public Integer getIdTipoSalonFk() {
         return idTipoSalonFk;
     }

@@ -30,6 +30,17 @@ public class Salon {
                 nullable = false)
     private TipoSalon tipoSalonFk;
 
+    @Column(name = "ADMINISTRADOR_TOTAL_FK", nullable = false)
+    private Integer administrador_total_fk;
+
+    public Integer getAdministrador_total_fk() {
+        return administrador_total_fk;
+    }
+
+    public void setAdministrador_total_fk(Integer administrador_total_fk) {
+        this.administrador_total_fk = administrador_total_fk;
+    }
+
     public Integer getIdTipoSalonFk() {
         return idTipoSalonFk;
     }
