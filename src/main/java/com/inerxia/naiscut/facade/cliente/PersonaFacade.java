@@ -6,11 +6,14 @@ import com.inerxia.naiscut.facade.cliente.dto.PersonaDto;
 import com.inerxia.naiscut.facade.mapper.PersonaMapper;
 import com.inerxia.naiscut.service.cliente.PersonaService;
 import org.hibernate.ObjectNotFoundException;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Service
 @Transactional
@@ -29,8 +32,11 @@ public class PersonaFacade extends Facade<PersonaMapper, PersonaService> impleme
         return mapper.toDto(service.findById(id));
     }
 
+
+
     @Override
-    public List<PersonaDto> findAll() {
-        return mapper.toDto(service.findAll());
+    public List<PersonaDto> findAll(Pageable pageable) {
+        Logger.getGlobal().log(Level.INFO, "Find All en persona. "+pageable.getPageSize()+" / "+pageable.getPageNumber() );
+        return mapper.toDto(service.findAll(pageable));
     }
 }

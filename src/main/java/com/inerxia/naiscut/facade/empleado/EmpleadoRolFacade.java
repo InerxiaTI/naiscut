@@ -6,6 +6,7 @@ import com.inerxia.naiscut.facade.empleado.dto.EmpleadoRolDto;
 import com.inerxia.naiscut.facade.mapper.EmpleadoRolMapper;
 import com.inerxia.naiscut.service.empleado.EmpleadoRolService;
 import org.hibernate.ObjectNotFoundException;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,7 +31,9 @@ public class EmpleadoRolFacade extends Facade<EmpleadoRolMapper, EmpleadoRolServ
     }
 
     @Override
-    public List<EmpleadoRolDto> findAll() {
+    public List<EmpleadoRolDto> findAll(Pageable pageable) {
         return null;
     }
+
+
 }

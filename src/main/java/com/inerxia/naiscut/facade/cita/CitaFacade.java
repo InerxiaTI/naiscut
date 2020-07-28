@@ -4,8 +4,10 @@ import com.inerxia.naiscut.facade.Facade;
 import com.inerxia.naiscut.facade.GeneralFacade;
 import com.inerxia.naiscut.facade.cita.dto.CitaDto;
 import com.inerxia.naiscut.facade.mapper.CitaMapper;
+import com.inerxia.naiscut.facade.salon.dto.SedeDto;
 import com.inerxia.naiscut.service.cita.CitaService;
 import org.hibernate.ObjectNotFoundException;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,8 +31,19 @@ public class CitaFacade extends Facade<CitaMapper, CitaService> implements Gener
         return mapper.toDto(service.findById(id));
     }
 
+    public CitaDto crearCita(CitaDto citaDto){
+        //salonFacade.findById(sedeDto.getIdSalonFk()); validar lo del consecutivo
+        return mapper.toDto(service.crearCita(mapper.toEntity(citaDto)));
+    }
+
+    public CitaDto editarCita(CitaDto citaDto){
+        //salonFacade.findById(sedeDto.getIdSalonFk());
+        return mapper.toDto(service.editarCita(mapper.toEntity(citaDto)));
+    }
+
     @Override
-    public List<CitaDto> findAll() {
+    public List<CitaDto> findAll(Pageable pageable) {
         return null;
     }
+
 }

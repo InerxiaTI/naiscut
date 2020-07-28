@@ -6,6 +6,7 @@ import com.inerxia.naiscut.facade.cliente.dto.UsuarioDto;
 import com.inerxia.naiscut.facade.mapper.UsuarioMapper;
 import com.inerxia.naiscut.service.cliente.UsuarioService;
 import org.hibernate.ObjectNotFoundException;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,7 +31,9 @@ public class UsuarioFacade extends Facade<UsuarioMapper, UsuarioService> impleme
     }
 
     @Override
-    public List<UsuarioDto> findAll() {
+    public List<UsuarioDto> findAll(Pageable pageable) {
         return null;
     }
+
+
 }

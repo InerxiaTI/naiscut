@@ -7,6 +7,7 @@ import com.inerxia.naiscut.model.salon.Sede;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
@@ -34,7 +35,7 @@ public class Cita {
     private LocalDateTime fechaHoraInicio;
 
     @Column(name = "DURACION_TOTAL", nullable = false)
-    private Integer duracion;
+    private Integer duracionTotal;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ESTADO_CITA_FK",insertable = false, updatable = false, nullable = false)
@@ -43,8 +44,20 @@ public class Cita {
     @Column(name = "FECHA_CREACION", nullable = false)
     private LocalDateTime fechaCreacion;
 
-    @Column(name = "CONSECUTIVO", nullable = false)
+    @Column(name = "CONSECUTIVO", nullable = false, updatable = false)
     private Integer consecutivo;
+
+    @Column(name="CLIENTE_ID_FK",  nullable = false)
+    private Integer idClienteFk;
+
+    @Column(name="EMPLEADO_ID_FK",  nullable = false)
+    private Integer idEmpleadoFk;
+
+    @Column(name="SEDE_ID_FK",  nullable = false)
+    private Integer idSedeFk;
+
+    @Column(name="ESTADO_CITA_FK",  nullable = false)
+    private Integer idEstadoCitaFk;
 
     public Integer getId() {
         return id;
@@ -86,12 +99,12 @@ public class Cita {
         this.fechaHoraInicio = fechaHoraInicio;
     }
 
-    public Integer getDuracion() {
-        return duracion;
+    public Integer getDuracionTotal() {
+        return duracionTotal;
     }
 
-    public void setDuracion(Integer duracion) {
-        this.duracion = duracion;
+    public void setDuracionTotal(Integer duracion) {
+        this.duracionTotal = duracion;
     }
 
     public EstadoCita getEstadoCitaFk() {
@@ -116,5 +129,37 @@ public class Cita {
 
     public void setConsecutivo(Integer consecutivo) {
         this.consecutivo = consecutivo;
+    }
+
+    public Integer getIdClienteFk() {
+        return idClienteFk;
+    }
+
+    public void setIdClienteFk(Integer idClienteFk) {
+        this.idClienteFk = idClienteFk;
+    }
+
+    public Integer getIdEmpleadoFk() {
+        return idEmpleadoFk;
+    }
+
+    public void setIdEmpleadoFk(Integer idEmpleadoFk) {
+        this.idEmpleadoFk = idEmpleadoFk;
+    }
+
+    public Integer getIdSedeFk() {
+        return idSedeFk;
+    }
+
+    public void setIdSedeFk(Integer idSedeFk) {
+        this.idSedeFk = idSedeFk;
+    }
+
+    public Integer getIdEstadoCitaFk() {
+        return idEstadoCitaFk;
+    }
+
+    public void setIdEstadoCitaFk(Integer idEstadoCitaFk) {
+        this.idEstadoCitaFk = idEstadoCitaFk;
     }
 }

@@ -6,6 +6,7 @@ import com.inerxia.naiscut.facade.cliente.dto.TipoIdentificacionDto;
 import com.inerxia.naiscut.facade.mapper.TipoIdentificacionMapper;
 import com.inerxia.naiscut.service.cliente.TipoIdentificacionService;
 import org.hibernate.ObjectNotFoundException;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,7 +31,9 @@ public class TipoIdentificacionFacade extends Facade<TipoIdentificacionMapper, T
     }
 
     @Override
-    public List<TipoIdentificacionDto> findAll() {
+    public List<TipoIdentificacionDto> findAll(Pageable pageable) {
         return null;
     }
+
+
 }

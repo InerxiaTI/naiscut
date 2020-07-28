@@ -6,6 +6,7 @@ import com.inerxia.naiscut.facade.cliente.dto.GeneroDto;
 import com.inerxia.naiscut.facade.mapper.GeneroMapper;
 import com.inerxia.naiscut.service.cliente.GeneroService;
 import org.hibernate.ObjectNotFoundException;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,7 +31,9 @@ public class GeneroFacade extends Facade<GeneroMapper, GeneroService> implements
     }
 
     @Override
-    public List<GeneroDto> findAll() {
+    public List<GeneroDto> findAll(Pageable pageable) {
         return null;
     }
+
+
 }

@@ -7,6 +7,7 @@ import com.inerxia.naiscut.util.StandardResponse;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,8 +46,8 @@ public class PersonaController {
             @ApiResponse(code = 400, message = "La petición es inválida"),
             @ApiResponse(code = 500, message = "Error del servidor al procesar la respuesta"),
     })
-    public ResponseEntity<StandardResponse<List<PersonaDto>>> findAll(){
-        List<PersonaDto> personasDto = personaFacade.findAll();
+    public ResponseEntity<StandardResponse<List<PersonaDto>>> findAll(Pageable pageable){
+        List<PersonaDto> personasDto = personaFacade.findAll(pageable);
         return ResponseEntity.ok(new StandardResponse<>(
                 StandardResponse.EstadoStandardResponse.OK,
                 personasDto));
