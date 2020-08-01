@@ -61,4 +61,13 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
                 HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(RangoInvalidatedException.class)
+    public final ResponseEntity<StandardResponse> handleRangoInvalidated(HttpServletRequest request, RangoInvalidatedException ex){
+        logger.error(request.getRequestURL().toString(), ex);
+        return new ResponseEntity<>(new StandardResponse(
+                StandardResponse.EstadoStandardResponse.ERROR,
+                ex.getMensaje()),
+                HttpStatus.BAD_REQUEST);
+    }
+
 }

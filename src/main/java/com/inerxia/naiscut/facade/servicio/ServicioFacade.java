@@ -7,6 +7,8 @@ import com.inerxia.naiscut.service.servicio.ServicioService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class ServicioFacade {
@@ -24,6 +26,18 @@ public class ServicioFacade {
 
     public ServicioDto findById(Integer id){
         return servicioMapper.toDto(servicioService.findById(id));
+    }
+
+    public List<ServicioDto> buscarPorNombre(String nombre){
+        return servicioMapper.toDto(servicioService.buscarPorNombre(nombre));
+    }
+
+    public List<ServicioDto> buscarPorSede(Integer idSedeFk){
+        return servicioMapper.toDto(servicioService.buscarPorSede(idSedeFk));
+    }
+
+    public List<ServicioDto> buscarPorRangoPrecios(Double menor, Double mayor){
+        return servicioMapper.toDto(servicioService.buscarPorRangoPrecios(menor, mayor));
     }
 
     public ServicioDto crearServicio(ServicioDto servicioDto){
