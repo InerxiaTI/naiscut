@@ -9,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -30,6 +31,17 @@ public class HorarioSedeService {
     }
 
     //TODO BUSCAR HORARIOS POR SEDE, POR RANGOS DE FECHA
+
+    public List<HorarioSede> buscarPorSede(Integer idSedeFk){
+        if(Objects.isNull(idSedeFk)){
+            throw new ObjectNoEncontradoException("exception.objeto_no_encontrado");
+        }
+        List<HorarioSede> horarioSedeList = horarioSedeRepository.findByIdSedeFk(idSedeFk);
+        if (horarioSedeList.isEmpty()){
+            throw new DataNotFoundException("exception.data_not_found.horario_sede");
+        }
+        return horarioSedeList;
+    }
 
     public HorarioSede crearHorarioSede(HorarioSede horarioSede){
         if(Objects.nonNull(horarioSede.getId())){

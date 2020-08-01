@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/horario-sede")
@@ -35,6 +36,20 @@ public class HorarioSedeController {
         return ResponseEntity.ok(new StandardResponse<>(
                 StandardResponse.EstadoStandardResponse.OK,
                 horarioSedeDto));
+    }
+
+    @GetMapping("/get-por-sede/{idSedeFk}")
+    @ApiOperation(value = "Busca los horarios de una sede", response = List.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La petición fue procesada con éxito"),
+            @ApiResponse(code = 400, message = "La petición es inválida"),
+            @ApiResponse(code = 500, message = "Error del servidor al procesar la respuesta"),
+    })
+    public ResponseEntity<StandardResponse<List<HorarioSedeDto>>> buscarPorSede(@PathVariable Integer idSedeFk){
+        List<HorarioSedeDto> horarioSedeDtoList = horarioSedeFacade.buscarPorSede(idSedeFk);
+        return ResponseEntity.ok(new StandardResponse<>(
+                StandardResponse.EstadoStandardResponse.OK,
+                horarioSedeDtoList));
     }
 
     @PostMapping

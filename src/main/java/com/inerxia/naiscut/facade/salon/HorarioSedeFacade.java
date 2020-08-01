@@ -1,15 +1,12 @@
 package com.inerxia.naiscut.facade.salon;
 
-import com.inerxia.naiscut.exception.DataNotFoundException;
 import com.inerxia.naiscut.facade.mapper.HorarioSedeMapper;
 import com.inerxia.naiscut.facade.salon.dto.HorarioSedeDto;
-import com.inerxia.naiscut.facade.salon.dto.SedeDto;
 import com.inerxia.naiscut.service.salon.HorarioSedeService;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Objects;
+import java.util.List;
 
 @Service
 @Transactional
@@ -31,6 +28,11 @@ public class HorarioSedeFacade {
     }
 
     //TODO CREAR VARIOS HORARIOS POR SEDE
+
+    public List<HorarioSedeDto> buscarPorSede(Integer idSedeFk){
+        sedeFacade.findById(idSedeFk);
+        return horarioSedeMapper.toDto(horarioSedeService.buscarPorSede(idSedeFk));
+    }
 
     public HorarioSedeDto crearHorarioSede(HorarioSedeDto horarioSedeDto){
         sedeFacade.findById(horarioSedeDto.getIdSedeFk());
