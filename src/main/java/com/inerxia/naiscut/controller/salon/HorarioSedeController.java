@@ -67,6 +67,22 @@ public class HorarioSedeController {
                 horarioSedeDto1));
     }
 
+    @PostMapping("/crear-horarios-por-sede")
+    @ApiOperation(value = "Crea varios horarios para una sede", response = List.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La petición fue procesada con éxito"),
+            @ApiResponse(code = 400, message = "La petición es inválida"),
+            @ApiResponse(code = 500, message = "Error del servidor al procesar la respuesta"),
+    })
+    public ResponseEntity<StandardResponse<List<HorarioSedeDto>>> crearHorariosPorSede(
+            @Valid @RequestBody List<HorarioSedeDto> horarioSedeDtoList){
+        List<HorarioSedeDto> horarioSedeDtoList1 = horarioSedeFacade.crearHorariosPorSede(horarioSedeDtoList);
+        return ResponseEntity.ok(new StandardResponse<>(
+                StandardResponse.EstadoStandardResponse.OK,
+                "horario_sede.crear.exito",
+                horarioSedeDtoList1));
+    }
+
     @PutMapping
     @ApiOperation(value = "Edita un horario de una sede", response = HorarioSedeDto.class)
     @ApiResponses(value = {
