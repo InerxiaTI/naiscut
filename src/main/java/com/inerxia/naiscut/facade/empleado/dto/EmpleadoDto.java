@@ -10,15 +10,11 @@ import javax.validation.constraints.Size;
 public class EmpleadoDto {
     private Integer id;
     private PersonaDto personaFk;
-    private EmpleadoRolDto rolFk;
 
     @NotNull
     @Size(max = 1)
     private char disponible;
     private SedeDto sedeFk;
-
-    @NotNull
-    private Integer idRolFk;
 
     @NotNull
     private Integer idPersonaFk;
@@ -42,14 +38,6 @@ public class EmpleadoDto {
         this.personaFk = personaFk;
     }
 
-    public EmpleadoRolDto getRolFk() {
-        return rolFk;
-    }
-
-    public void setRolFk(EmpleadoRolDto rolFk) {
-        this.rolFk = rolFk;
-    }
-
     public char getDisponible() {
         return disponible;
     }
@@ -66,13 +54,6 @@ public class EmpleadoDto {
         this.sedeFk = sedeFk;
     }
 
-    public Integer getIdRolFk() {
-        return idRolFk;
-    }
-
-    public void setIdRolFk(Integer idRolFk) {
-        this.idRolFk = idRolFk;
-    }
 
     public Integer getIdPersonaFk() {
         return idPersonaFk;
@@ -90,14 +71,5 @@ public class EmpleadoDto {
         this.idSedeFk = idSedeFk;
     }
 
-    @Override
-    public String toString() {
-        return "EmpleadoDto{" +
-                "id=" + id +
-                ", personaFk=" + personaFk.toString() +
-                ", rolFk=" + rolFk.toString() +
-                ", disponible=" + disponible +
-                ", sedeFk=" + sedeFk.toString() +
-                '}';
-    }
+
 }

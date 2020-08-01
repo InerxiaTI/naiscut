@@ -2,6 +2,7 @@ package com.inerxia.naiscut.facade.cliente;
 
 import com.inerxia.naiscut.facade.Facade;
 import com.inerxia.naiscut.facade.GeneralFacade;
+import com.inerxia.naiscut.facade.cita.dto.CitaDto;
 import com.inerxia.naiscut.facade.cliente.dto.ClienteDto;
 import com.inerxia.naiscut.facade.mapper.ClienteMapper;
 import com.inerxia.naiscut.service.cliente.ClienteService;
@@ -28,6 +29,11 @@ public class ClienteFacade extends Facade<ClienteMapper, ClienteService> impleme
             throw new ObjectNotFoundException(id, "exception.objeto_no_encontrado");
         }
         return mapper.toDto(service.findById(id));
+    }
+
+    public ClienteDto crearCliente(ClienteDto clienteDto){
+        //salonFacade.findById(sedeDto.getIdSalonFk()); validar lo del consecutivo
+        return mapper.toDto(service.crearCliente(mapper.toEntity(clienteDto)));
     }
 
     @Override

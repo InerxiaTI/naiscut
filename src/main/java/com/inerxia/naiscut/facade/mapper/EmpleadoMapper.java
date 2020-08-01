@@ -8,6 +8,6 @@ import com.inerxia.naiscut.model.empleado.Empleado;
 import com.inerxia.naiscut.model.salon.TipoSalon;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring", uses = {PersonaMapper.class, EmpleadoRolMapper.class, SedeMapper.class})
+@Mapper(componentModel = "spring", uses = {PersonaMapper.class, SedeMapper.class})
 public interface EmpleadoMapper extends EntityMapper<EmpleadoDto, Empleado>{
 }

@@ -164,22 +164,5 @@ public class PersonaDto {
         this.idGeneroFk = idGeneroFk;
     }
 
-    @Override
-    public String toString() {
-        return "PersonaDto{" +
-                "id=" + id +
-                ", identificacion='" + identificacion + '\'' +
-                ", tipoIdentificacionFk=" + tipoIdentificacionFk.toString() +
-                ", primerNombre='" + primerNombre + '\'' +
-                ", segundoNombre='" + segundoNombre + '\'' +
-                ", primerApellido='" + primerApellido + '\'' +
-                ", segundoApellido='" + segundoApellido + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", correo='" + correo + '\'' +
-                ", telefonoMovil='" + telefonoMovil + '\'' +
-                ", telefonoFijo='" + telefonoFijo + '\'' +
-                ", fechaNacimiento=" + fechaNacimiento +
-                ", generoFk=" + generoFk.toString() +
-                '}';
-    }
+
 }

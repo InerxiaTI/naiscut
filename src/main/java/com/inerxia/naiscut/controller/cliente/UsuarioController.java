@@ -1,6 +1,8 @@
 package com.inerxia.naiscut.controller.cliente;
 
 import com.inerxia.naiscut.facade.cliente.UsuarioFacade;
+import com.inerxia.naiscut.facade.cliente.dto.PersonaDto;
+import com.inerxia.naiscut.facade.cliente.dto.RegistroPersonaDto;
 import com.inerxia.naiscut.facade.cliente.dto.UsuarioDto;
 import com.inerxia.naiscut.facade.ocupacion.dto.OcupacionDto;
 import com.inerxia.naiscut.util.StandardResponse;
@@ -8,10 +10,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/usuario")
@@ -35,4 +36,37 @@ public class UsuarioController {
                 StandardResponse.EstadoStandardResponse.OK,
                 usuarioDto));
     }
+
+
+    @PostMapping("/registrar-usuario")
+    @ApiOperation(value = "Registro en la aplicación", response = RegistroPersonaDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La petición fue procesada con éxito"),
+            @ApiResponse(code = 400, message = "La petición es inválida"),
+            @ApiResponse(code = 500, message = "Error del servidor al procesar la respuesta"),
+    })
+    public ResponseEntity<StandardResponse<RegistroPersonaDto>> crearSede(@Valid @RequestBody RegistroPersonaDto registroPersonaDto){
+        RegistroPersonaDto registroPersonaDto1 = usuarioFacade.registrarUsuario(registroPersonaDto);
+        return ResponseEntity.ok(new StandardResponse<>(
+                StandardResponse.EstadoStandardResponse.OK,
+                "registro_usuario.crear.exito",
+                registroPersonaDto1));
+    }
+
+    @PutMapping
+    @ApiOperation(value = "Edita usuario", response = UsuarioDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La petición fue procesada con éxito"),
+            @ApiResponse(code = 400, message = "La petición es inválida"),
+            @ApiResponse(code = 500, message = "Error del servidor al procesar la respuesta"),
+    })
+    public ResponseEntity<StandardResponse<UsuarioDto>> editarSede(@Valid @RequestBody UsuarioDto usuarioDto){
+        UsuarioDto usuarioDto1 = usuarioFacade.editarUsuario(usuarioDto);
+        return ResponseEntity.ok(new StandardResponse<>(
+                StandardResponse.EstadoStandardResponse.OK,
+                "usuario.editar.exito",
+                usuarioDto1));
+    }
+
+
 }

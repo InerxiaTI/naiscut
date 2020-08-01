@@ -3,10 +3,7 @@ package com.inerxia.naiscut.controller.cita;
 
 import com.inerxia.naiscut.facade.cita.CitaFacade;
 import com.inerxia.naiscut.facade.cita.dto.CitaDto;
-import com.inerxia.naiscut.facade.empleado.dto.EmpleadoRolDto;
-import com.inerxia.naiscut.facade.salon.dto.SedeDto;
 import com.inerxia.naiscut.util.StandardResponse;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -26,7 +23,7 @@ public class CitaController {
     }
 
     @GetMapping("/get-por-id/{id}")
-    @ApiOperation(value = "Busca el rol de empleados por id", response = CitaDto.class)
+    @ApiOperation(value = "Busca la cita por id", response = CitaDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La petición fue procesada con éxito"),
             @ApiResponse(code = 400, message = "La petición es inválida"),

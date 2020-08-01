@@ -19,7 +19,6 @@ public class UsuarioDto {
     @Size(max = 1)
     private char estado;
 
-    @NotNull
     private Integer idPersonaFk;
 
     public Integer getId() {
@@ -70,14 +69,5 @@ public class UsuarioDto {
         this.idPersonaFk = idPersonaFk;
     }
 
-    @Override
-    public String toString() {
-        return "UsuarioDto{" +
-                "id=" + id +
-                ", usuario='" + usuario + '\'' +
-                ", clave='" + clave + '\'' +
-                ", personaFk=" + personaFk.toString() +
-                ", estado=" + estado +
-                '}';
-    }
+
 }

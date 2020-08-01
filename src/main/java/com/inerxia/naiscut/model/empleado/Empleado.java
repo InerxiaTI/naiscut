@@ -23,19 +23,12 @@ public class Empleado {
                 unique = true)
     private Persona personaFk;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ROL_ID_FK",insertable = false, updatable = false, nullable = false)
-    private EmpleadoRol rolFk;
-
     @Column(name = "DISPONIBLE", nullable = false)
     private char disponible;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SEDE_ID_FK",insertable = false, updatable = false, nullable = false)
     private Sede sedeFk;
-
-    @Column(name="ROL_ID_FK",  nullable = false)
-    private Integer idRolFk;
 
     @Column(name="PERSONA_FK",  nullable = false)
     private Integer idPersonaFk;
@@ -59,13 +52,6 @@ public class Empleado {
         this.personaFk = personaFk;
     }
 
-    public EmpleadoRol getRolFk() {
-        return rolFk;
-    }
-
-    public void setRolFk(EmpleadoRol rolFk) {
-        this.rolFk = rolFk;
-    }
 
     public char getDisponible() {
         return disponible;
@@ -81,14 +67,6 @@ public class Empleado {
 
     public void setSedeFk(Sede sedeFk) {
         this.sedeFk = sedeFk;
-    }
-
-    public Integer getIdRolFk() {
-        return idRolFk;
-    }
-
-    public void setIdRolFk(Integer idRolFk) {
-        this.idRolFk = idRolFk;
     }
 
     public Integer getIdPersonaFk() {

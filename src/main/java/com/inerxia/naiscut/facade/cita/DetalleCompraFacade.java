@@ -2,6 +2,7 @@ package com.inerxia.naiscut.facade.cita;
 
 import com.inerxia.naiscut.facade.Facade;
 import com.inerxia.naiscut.facade.GeneralFacade;
+import com.inerxia.naiscut.facade.cita.dto.CitaDto;
 import com.inerxia.naiscut.facade.cita.dto.DetalleCompraDto;
 import com.inerxia.naiscut.facade.mapper.DetalleCompraMapper;
 import com.inerxia.naiscut.service.cita.DetalleCompraService;
@@ -28,6 +29,16 @@ public class DetalleCompraFacade extends Facade<DetalleCompraMapper, DetalleComp
             throw new ObjectNotFoundException(id, "exception.objeto_no_encontrado");
         }
         return mapper.toDto(service.findById(id));
+    }
+
+    public DetalleCompraDto crearDetalleCompra(DetalleCompraDto detalleCompraDto){
+        //salonFacade.findById(sedeDto.getIdSalonFk()); validar lo del consecutivo
+        return mapper.toDto(service.crearDetalleCompra(mapper.toEntity(detalleCompraDto)));
+    }
+
+    public DetalleCompraDto editarDetalleCompra(DetalleCompraDto detalleCompraDto){
+        //salonFacade.findById(sedeDto.getIdSalonFk());
+        return mapper.toDto(service.editarDetalleCompra(mapper.toEntity(detalleCompraDto)));
     }
 
     @Override

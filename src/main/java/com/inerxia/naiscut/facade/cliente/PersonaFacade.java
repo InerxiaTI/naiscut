@@ -2,6 +2,7 @@ package com.inerxia.naiscut.facade.cliente;
 
 import com.inerxia.naiscut.facade.Facade;
 import com.inerxia.naiscut.facade.GeneralFacade;
+import com.inerxia.naiscut.facade.cita.dto.CitaDto;
 import com.inerxia.naiscut.facade.cliente.dto.PersonaDto;
 import com.inerxia.naiscut.facade.mapper.PersonaMapper;
 import com.inerxia.naiscut.service.cliente.PersonaService;
@@ -32,7 +33,15 @@ public class PersonaFacade extends Facade<PersonaMapper, PersonaService> impleme
         return mapper.toDto(service.findById(id));
     }
 
+    public PersonaDto crearPersona(PersonaDto personaDto){
+        //salonFacade.findById(sedeDto.getIdSalonFk()); validar lo del consecutivo
+        return mapper.toDto(service.crearPersona(mapper.toEntity(personaDto)));
+    }
 
+    public PersonaDto editarPersona(PersonaDto personaDto){
+        //salonFacade.findById(sedeDto.getIdSalonFk());
+        return mapper.toDto(service.editarPersona(mapper.toEntity(personaDto)));
+    }
 
     @Override
     public List<PersonaDto> findAll(Pageable pageable) {
