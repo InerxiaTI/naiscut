@@ -1,6 +1,8 @@
 package com.inerxia.naiscut.facade.salon;
 
 import com.inerxia.naiscut.facade.mapper.SedeMapper;
+import com.inerxia.naiscut.facade.salon.dto.RegistroSalonDto;
+import com.inerxia.naiscut.facade.salon.dto.SalonDto;
 import com.inerxia.naiscut.facade.salon.dto.SedeDto;
 import com.inerxia.naiscut.service.salon.SedeService;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,26 @@ public class SedeFacade {
 
     public List<SedeDto> buscarPorDireccion(String direccion){
         return sedeMapper.toDto(sedeService.buscarPorDireccion(direccion));
+    }
+
+    public List<SedeDto> buscarPorNombreSalon(String nombre){
+        return sedeMapper.toDto(sedeService.buscarPorNombreSalon(nombre));
+    }
+
+    public SedeDto cambiarSedePrincipal(Integer idSede){
+        return sedeMapper.toDto(sedeService.cambiarSedePrincipal(idSede));
+    }
+
+    public RegistroSalonDto registrarSalon(RegistroSalonDto registroSalonDto){
+        SalonDto salonDto = salonFacade.crearSalon(registroSalonDto.getSalonDto());
+        registroSalonDto.getSedeDto().setIdSalonFk(salonDto.getId());
+        SedeDto sedeDto = crearSede(registroSalonDto.getSedeDto());
+
+        RegistroSalonDto registroSalonDto1 = new RegistroSalonDto();
+        registroSalonDto1.setSalonDto(salonDto);
+        registroSalonDto1.setSedeDto(sedeDto);
+
+        return registroSalonDto1;
     }
 
     public SedeDto crearSede(SedeDto sedeDto){

@@ -6,6 +6,7 @@ import com.inerxia.naiscut.exception.SedePrincipalExistsException;
 import com.inerxia.naiscut.model.salon.Sede;
 import com.inerxia.naiscut.model.salon.SedeRepository;
 import com.inerxia.naiscut.exception.DataConstraintViolationException;
+import com.inerxia.naiscut.util.DataTypeHandler;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,8 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @Service
 @Transactional
@@ -55,24 +54,50 @@ public class SedeService {
         return sedeList;
     }
 
-    //todo permitir cambiar la sede principal
+    public List<Sede> buscarPorNombreSalon(String nombre){
+        if(Objects.isNull(nombre)){
+            throw new ObjectNoEncontradoException("exception.objeto_no_encontrado");
+        }
+        List<Sede> sedeList = sedeRepository.findByNombreSalon(nombre);
+        if (sedeList.isEmpty()){
+            throw new DataNotFoundException("exception.data_not_found.sede");
+        }
+        return sedeList;
+    }
+
+    public Sede cambiarSedePrincipal(Integer idSede){
+        if(Objects.isNull(idSede)){
+            throw new ObjectNoEncontradoException("exception.objeto_no_encontrado");
+        }
+        Sede futuraSedePrincipal = sedeRepository.findById(idSede)
+                .orElseThrow(()-> new DataNotFoundException("exception.data_not_found.sede"));
+
+        Optional<Sede> sedePrincipal = sedeRepository.findByIdSalonFkAndPrincipal(futuraSedePrincipal.getIdSalonFk(), '1');
+        if(sedePrincipal.isPresent()) {
+            Sede actualSedePrincipal = sedePrincipal.get();
+            actualSedePrincipal.setPrincipal('0');
+            futuraSedePrincipal.setPrincipal('1');
+        }
+        return futuraSedePrincipal;
+    }
 
     public Sede crearSede(Sede sede){
-        //todo cambiar la validacion por booleano
-        if(sede.getPrincipal()=='1') {
-            Optional<Sede> sedePrincipal = sedeRepository.findByIdSalonFkAndPrincipal(sede.getIdSalonFk(), sede.getPrincipal());
-            if (sedePrincipal.isPresent()) {
-                throw new SedePrincipalExistsException("exception.sede_principal_exists.sede");
-            }
-        }
         if(Objects.nonNull(sede.getId())){
             Optional<Sede> salonOptional = sedeRepository.findById(sede.getId());
             if(salonOptional.isPresent()){
                 throw new DataNotFoundException("exception.data_duplicated.sede");
             }
         }
-
+        if(DataTypeHandler.charToBoolean(sede.getPrincipal())){
+            Optional<Sede> sedePrincipal = sedeRepository.findByIdSalonFkAndPrincipal(sede.getIdSalonFk(), sede.getPrincipal());
+            if (sedePrincipal.isPresent()) {
+                throw new SedePrincipalExistsException("exception.sede_principal_exists.sede");
+            }
+        }
         try {
+            sede.setPrincipal(DataTypeHandler.charToBoolean(sede.getPrincipal()) ? '1' : '0');
+            sede.setDomicilio(DataTypeHandler.charToBoolean(sede.getDomicilio()) ? '1' : '0');
+            sede.setEstadoSede(DataTypeHandler.charToBoolean(sede.getEstadoSede()) ? '1' : '0');
             return sedeRepository.save(sede);
         }catch (DataIntegrityViolationException e) {
             throw new DataConstraintViolationException("exception.data_constraint_violation.sede");
@@ -93,9 +118,9 @@ public class SedeService {
             sedeTx.setCiudad(sede.getCiudad());
             sedeTx.setDireccion(sede.getDireccion());
             sedeTx.setTelefono(sede.getTelefono());
-            sedeTx.setDomicilio(sede.getDomicilio());
             sedeTx.setAdministradorFk(sede.getAdministradorFk());
-            sedeTx.setEstadoSede(sede.getEstadoSede());
+            sedeTx.setDomicilio(DataTypeHandler.charToBoolean(sede.getDomicilio()) ? '1' : '0');
+            sedeTx.setEstadoSede(DataTypeHandler.charToBoolean(sede.getEstadoSede()) ? '1' : '0');
             return sedeTx;
         }catch (DataIntegrityViolationException e) {
             throw new DataConstraintViolationException("exception.data_constraint_violation.sede");

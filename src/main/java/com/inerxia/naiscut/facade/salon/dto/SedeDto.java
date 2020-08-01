@@ -38,7 +38,6 @@ public class SedeDto {
 
     private SalonDto salonFk;
 
-    @NotNull
     private Integer idSalonFk;
 
     public Integer getIdSalonFk() {

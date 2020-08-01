@@ -2,6 +2,7 @@ package com.inerxia.naiscut.controller.salon;
 
 import com.inerxia.naiscut.exception.DataConstraintViolationException;
 import com.inerxia.naiscut.facade.salon.SedeFacade;
+import com.inerxia.naiscut.facade.salon.dto.RegistroSalonDto;
 import com.inerxia.naiscut.facade.salon.dto.SedeDto;
 import com.inerxia.naiscut.util.StandardResponse;
 import io.swagger.annotations.ApiOperation;
@@ -13,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/sede")
@@ -68,6 +67,35 @@ public class SedeController {
                 sedeDtoList));
     }
 
+    @GetMapping("/get-por-nombre-salon/{nombre}")
+    @ApiOperation(value = "Busca sedes por el nombre del salon", response = List.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La petición fue procesada con éxito"),
+            @ApiResponse(code = 400, message = "La petición es inválida"),
+            @ApiResponse(code = 500, message = "Error del servidor al procesar la respuesta"),
+    })
+    public ResponseEntity<StandardResponse<List<SedeDto>>> buscarPorNombreSalon(@PathVariable String nombre){
+        List<SedeDto> sedeDtoList = sedeFacade.buscarPorNombreSalon(nombre);
+        return ResponseEntity.ok(new StandardResponse<>(
+                StandardResponse.EstadoStandardResponse.OK,
+                sedeDtoList));
+    }
+
+    @PostMapping("/registrar-salon")
+    @ApiOperation(value = "Registra un salon y una sede principal", response = RegistroSalonDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La petición fue procesada con éxito"),
+            @ApiResponse(code = 400, message = "La petición es inválida"),
+            @ApiResponse(code = 500, message = "Error del servidor al procesar la respuesta"),
+    })
+    public ResponseEntity<StandardResponse<RegistroSalonDto>> registrarSalon(@Valid @RequestBody RegistroSalonDto registroSalonDto){
+        RegistroSalonDto registroSalonDto1 = sedeFacade.registrarSalon(registroSalonDto);
+        return ResponseEntity.ok(new StandardResponse<>(
+                StandardResponse.EstadoStandardResponse.OK,
+                "registro_salon.crear.exito",
+                registroSalonDto1));
+    }
+
     @PostMapping
     @ApiOperation(value = "Crea una sede", response = SedeDto.class)
     @ApiResponses(value = {
@@ -100,5 +128,20 @@ public class SedeController {
         }catch (DataIntegrityViolationException e){
             throw new DataConstraintViolationException("exception.data_constraint_violation.sede");
         }
+    }
+
+    @PutMapping("/cambiar-sede-principal/{idSede}")
+    @ApiOperation(value = "Cambia la sede principal", response = SedeDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La petición fue procesada con éxito"),
+            @ApiResponse(code = 400, message = "La petición es inválida"),
+            @ApiResponse(code = 500, message = "Error del servidor al procesar la respuesta"),
+    })
+    public ResponseEntity<StandardResponse<SedeDto>> cambiarSedePrincipal(@PathVariable Integer idSede){
+        SedeDto sedeDto1 = sedeFacade.cambiarSedePrincipal(idSede);
+        return ResponseEntity.ok(new StandardResponse<>(
+                StandardResponse.EstadoStandardResponse.OK,
+                "sede.editar.exito",
+                sedeDto1));
     }
 }
