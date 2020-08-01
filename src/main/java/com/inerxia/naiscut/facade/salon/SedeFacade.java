@@ -38,6 +38,10 @@ public class SedeFacade {
         return sedeMapper.toDto(sedeService.buscarPorDireccion(direccion));
     }
 
+    public List<SedeDto> buscarPorNombreSalon(String nombre){
+        return sedeMapper.toDto(sedeService.buscarPorNombreSalon(nombre));
+    }
+
     public SedeDto cambiarSedePrincipal(Integer idSede){
         return sedeMapper.toDto(sedeService.cambiarSedePrincipal(idSede));
     }

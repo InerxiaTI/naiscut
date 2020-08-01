@@ -54,6 +54,17 @@ public class SedeService {
         return sedeList;
     }
 
+    public List<Sede> buscarPorNombreSalon(String nombre){
+        if(Objects.isNull(nombre)){
+            throw new ObjectNoEncontradoException("exception.objeto_no_encontrado");
+        }
+        List<Sede> sedeList = sedeRepository.findByNombreSalon(nombre);
+        if (sedeList.isEmpty()){
+            throw new DataNotFoundException("exception.data_not_found.sede");
+        }
+        return sedeList;
+    }
+
     public Sede cambiarSedePrincipal(Integer idSede){
         if(Objects.isNull(idSede)){
             throw new ObjectNoEncontradoException("exception.objeto_no_encontrado");
