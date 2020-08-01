@@ -8,6 +8,7 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -37,7 +38,16 @@ public class EmpleadoServicioFacade {
         return empleadoServicioMapper.toDto(empleadoServicioService.findById(id));
     }
 
-    //todo crear varios servicios para un empleado, varios empleados para un servicio
+    //todo mejorar los dto para la respuesta json
+    public List<EmpleadoServicioDto> buscarServiciosDeEmpleado(Integer idEmpleadoFk){
+        empleadoFacade.findById(idEmpleadoFk);
+        return empleadoServicioMapper.toDto(empleadoServicioService.buscarServiciosDeEmpleado(idEmpleadoFk));
+    }
+
+    public List<EmpleadoServicioDto> buscarEmpleadosDeServicio(Integer idServicioFk){
+        servicioFacade.findById(idServicioFk);
+        return empleadoServicioMapper.toDto(empleadoServicioService.buscarEmpleadosDeServicio(idServicioFk));
+    }
 
     public EmpleadoServicioDto crearEmpleadoServicio(EmpleadoServicioDto empleadoServicioDto){
         empleadoFacade.findById(empleadoServicioDto.getIdEmpleadoFk());

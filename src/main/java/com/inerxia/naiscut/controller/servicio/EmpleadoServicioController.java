@@ -39,6 +39,34 @@ public class EmpleadoServicioController {
                 empleadoServicioDto));
     }
 
+    @GetMapping("/get-servicios-de-empleado/{idEmpleadoFk}")
+    @ApiOperation(value = "Busca servicios de un empleado", response = List.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La petición fue procesada con éxito"),
+            @ApiResponse(code = 400, message = "La petición es inválida"),
+            @ApiResponse(code = 500, message = "Error del servidor al procesar la respuesta"),
+    })
+    public ResponseEntity<StandardResponse<List<EmpleadoServicioDto>>> buscarServiciosDeEmpleado(@PathVariable Integer idEmpleadoFk){
+        List<EmpleadoServicioDto> empleadoServicioDtoList = empleadoServicioFacade.buscarServiciosDeEmpleado(idEmpleadoFk);
+        return ResponseEntity.ok(new StandardResponse<>(
+                StandardResponse.EstadoStandardResponse.OK,
+                empleadoServicioDtoList));
+    }
+
+    @GetMapping("/get-empleados-de-servicio/{idServicioFk}")
+    @ApiOperation(value = "Busca empleados de un servicio", response = List.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La petición fue procesada con éxito"),
+            @ApiResponse(code = 400, message = "La petición es inválida"),
+            @ApiResponse(code = 500, message = "Error del servidor al procesar la respuesta"),
+    })
+    public ResponseEntity<StandardResponse<List<EmpleadoServicioDto>>> buscarEmpleadosDeServicio(@PathVariable Integer idServicioFk){
+        List<EmpleadoServicioDto> empleadoServicioDtoList = empleadoServicioFacade.buscarEmpleadosDeServicio(idServicioFk);
+        return ResponseEntity.ok(new StandardResponse<>(
+                StandardResponse.EstadoStandardResponse.OK,
+                empleadoServicioDtoList));
+    }
+
     @PostMapping
     @ApiOperation(value = "Crea un servicio para un empleado", response = EmpleadoServicioDto.class)
     @ApiResponses(value = {

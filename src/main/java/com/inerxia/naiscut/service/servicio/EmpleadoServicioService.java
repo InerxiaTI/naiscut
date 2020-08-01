@@ -9,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -30,7 +31,27 @@ public class EmpleadoServicioService {
                 .orElseThrow(()-> new DataNotFoundException("exception.data_not_found.empleado_servicio"));
     }
 
-    //todo buscar servicios de un empleado, buscar empleados de un servicio
+    public List<EmpleadoServicio> buscarServiciosDeEmpleado(Integer idEmpleadoFk){
+        if(Objects.isNull(idEmpleadoFk)){
+            throw new ObjectNoEncontradoException("exception.objeto_no_encontrado");
+        }
+        List<EmpleadoServicio> empleadoServicioList = this.empleadoServicioRepository.findByIdEmpleadoFk(idEmpleadoFk);
+        if (empleadoServicioList.isEmpty()){
+            throw new DataNotFoundException("exception.data_not_found.empleado_servicio");
+        }
+        return empleadoServicioList;
+    }
+
+    public List<EmpleadoServicio> buscarEmpleadosDeServicio(Integer idServicioFk){
+        if(Objects.isNull(idServicioFk)){
+            throw new ObjectNoEncontradoException("exception.objeto_no_encontrado");
+        }
+        List<EmpleadoServicio> empleadoServicioList = this.empleadoServicioRepository.findByIdServicioFk(idServicioFk);
+        if (empleadoServicioList.isEmpty()){
+            throw new DataNotFoundException("exception.data_not_found.empleado_servicio");
+        }
+        return empleadoServicioList;
+    }
 
     public EmpleadoServicio crearEmpleadoServcio(EmpleadoServicio empleadoServicio){
         if(Objects.nonNull(empleadoServicio.getId())){
