@@ -6,7 +6,9 @@ import com.inerxia.naiscut.facade.salon.dto.SedeDto;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class OcupacionDto {
 
@@ -18,10 +20,13 @@ public class OcupacionDto {
     private Integer idEmpleadoFk;
 
     @NotNull
-    private LocalDateTime fechaHoraInicio;
+    private LocalDate fecha;
 
     @NotNull
-    private LocalDateTime fechaHoraFinal;
+    private LocalTime horaInicio;
+
+    @NotNull
+    private LocalTime horaFinal;
 
     private CitaDto citaFk;
 
@@ -67,20 +72,28 @@ public class OcupacionDto {
         this.id = id;
     }
 
-    public LocalDateTime getFechaHoraInicio() {
-        return fechaHoraInicio;
+    public LocalDate getFecha() {
+        return fecha;
     }
 
-    public void setFechaHoraInicio(LocalDateTime fechaHoraInicio) {
-        this.fechaHoraInicio = fechaHoraInicio;
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
     }
 
-    public LocalDateTime getFechaHoraFinal() {
-        return fechaHoraFinal;
+    public LocalTime getHoraInicio() {
+        return horaInicio;
     }
 
-    public void setFechaHoraFinal(LocalDateTime fechaHoraFinal) {
-        this.fechaHoraFinal = fechaHoraFinal;
+    public void setHoraInicio(LocalTime horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public LocalTime getHoraFinal() {
+        return horaFinal;
+    }
+
+    public void setHoraFinal(LocalTime horaFinal) {
+        this.horaFinal = horaFinal;
     }
 
     public EmpleadoDto getEmpleadoFk() {

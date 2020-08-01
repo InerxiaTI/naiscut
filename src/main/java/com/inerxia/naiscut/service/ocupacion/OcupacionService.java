@@ -9,6 +9,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -30,6 +32,17 @@ public class OcupacionService {
     }
 
     //todo buscar ocupacion por sede, por rango de fechas, por empleado
+
+    public List<Ocupacion> buscarPorFechaYSede(LocalDate fecha, Integer idSedeFk){
+        if(Objects.isNull(fecha) || Objects.isNull(idSedeFk)){
+            throw new ObjectNoEncontradoException("exception.objeto_no_encontrado");
+        }
+        List<Ocupacion> ocupacionList = this.ocupacionRepository.findByFechaAndIdSedeFk(fecha,idSedeFk);
+        if (ocupacionList.isEmpty()){
+            throw new DataNotFoundException("exception.data_not_found.ocupacion");
+        }
+        return ocupacionList;
+    }
 
     public Ocupacion crearOcupacion(Ocupacion ocupacion){
         if(Objects.nonNull(ocupacion.getId())){
@@ -55,8 +68,8 @@ public class OcupacionService {
 
         try{
             ocupacionTx.setIdEmpleadoFk(ocupacion.getIdEmpleadoFk());
-            ocupacionTx.setFechaHoraInicio(ocupacion.getFechaHoraInicio());
-            ocupacionTx.setFechaHoraFinal(ocupacion.getFechaHoraFinal());
+            ocupacionTx.setHoraInicio(ocupacion.getHoraInicio());
+            ocupacionTx.setHoraFinal(ocupacion.getHoraFinal());
             ocupacionTx.setIdCitaFk(ocupacion.getIdCitaFk());
             ocupacionTx.setComentario(ocupacion.getComentario());
             ocupacionTx.setIdSedeFk(ocupacion.getIdSedeFk());

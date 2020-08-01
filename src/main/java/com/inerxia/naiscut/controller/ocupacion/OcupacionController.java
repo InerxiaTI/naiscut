@@ -2,6 +2,7 @@ package com.inerxia.naiscut.controller.ocupacion;
 
 import com.inerxia.naiscut.exception.DataConstraintViolationException;
 import com.inerxia.naiscut.facade.ocupacion.OcupacionFacade;
+import com.inerxia.naiscut.facade.ocupacion.dto.OcupacionDiaDto;
 import com.inerxia.naiscut.facade.ocupacion.dto.OcupacionDto;
 import com.inerxia.naiscut.util.StandardResponse;
 import io.swagger.annotations.ApiOperation;
@@ -35,6 +36,21 @@ public class OcupacionController {
         return ResponseEntity.ok(new StandardResponse<>(
                 StandardResponse.EstadoStandardResponse.OK,
                 ocupacionDto));
+    }
+
+    @PostMapping("/get-ocupacion-dia")
+    @ApiOperation(value = "Obtiene la ocupacion del dia de una sede", response = OcupacionDiaDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La petición fue procesada con éxito"),
+            @ApiResponse(code = 400, message = "La petición es inválida"),
+            @ApiResponse(code = 500, message = "Error del servidor al procesar la respuesta"),
+    })
+    public ResponseEntity<StandardResponse<OcupacionDiaDto>> getOcupacionDelDia(
+            @Valid @RequestBody OcupacionDiaDto ocupacionDiaDto){
+        OcupacionDiaDto ocupacionDto1 = ocupacionFacade.getOcupacionDelDia(ocupacionDiaDto);
+        return ResponseEntity.ok(new StandardResponse<>(
+                StandardResponse.EstadoStandardResponse.OK,
+                ocupacionDto1));
     }
 
     @PostMapping
