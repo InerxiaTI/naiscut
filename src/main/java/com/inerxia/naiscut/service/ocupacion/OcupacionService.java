@@ -44,6 +44,17 @@ public class OcupacionService {
         return ocupacionList;
     }
 
+    public List<Ocupacion> buscarPorFechaYSedeYIdEmpleado(LocalDate fecha, Integer idSedeFk, Integer idEmpleadoFk){
+        if(Objects.isNull(fecha) || Objects.isNull(idSedeFk) || Objects.isNull(idEmpleadoFk)){
+            throw new ObjectNoEncontradoException("exception.objeto_no_encontrado");
+        }
+        List<Ocupacion> ocupacionList = this.ocupacionRepository.findByFechaAndIdSedeFkAndIdEmpleadoFk(fecha,idSedeFk, idEmpleadoFk);
+        if (ocupacionList.isEmpty()){
+            throw new DataNotFoundException("exception.data_not_found.ocupacion");
+        }
+        return ocupacionList;
+    }
+
     public Ocupacion crearOcupacion(Ocupacion ocupacion){
         if(Objects.nonNull(ocupacion.getId())){
             Optional<Ocupacion> ocupacionOptional = ocupacionRepository.findById(ocupacion.getId());

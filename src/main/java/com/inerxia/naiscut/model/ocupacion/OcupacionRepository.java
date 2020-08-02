@@ -8,5 +8,6 @@ import java.util.List;
 public interface OcupacionRepository extends JpaRepository<Ocupacion, Integer> {
 
     List<Ocupacion> findByFechaAndIdSedeFk(LocalDate fecha, Integer idSedeFk);
+    List<Ocupacion> findByFechaAndIdSedeFkAndIdEmpleadoFk(LocalDate fecha, Integer idSedeFk, Integer idEmpleadoFk);
 
 }
