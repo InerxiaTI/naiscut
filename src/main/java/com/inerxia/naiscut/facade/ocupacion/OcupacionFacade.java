@@ -23,6 +23,8 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @Transactional
@@ -60,6 +62,52 @@ public class OcupacionFacade {
         return ocupacionMapper.toDto(ocupacionService.findById(id));
     }
 
+    public OcupacionDiaServicioDto getOcupacionDiaServicio1(OcupacionDiaServicioDto ocupacionDiaServicioDto){
+        List<EmpleadosServicioDto> empleadosServicioDtos = new ArrayList<>();
+
+        ocupacionDiaServicioDto.getIdServiciosFK().forEach((i)->{
+            EmpleadosServicioDto empleadosServicioDto = new EmpleadosServicioDto();
+            empleadosServicioDto.setIdServicioFk(i);
+            empleadosServicioDto.setIdEmpleadosFk(empleadoServicioFacade.buscarIdEmpleadosDeServicio(i));
+            empleadosServicioDtos.add(empleadosServicioDto);
+        });
+
+        List<OcupacionDto> ocupacionDtoList = ocupacionMapper.toDto(
+                ocupacionService.buscarPorFechaYSede(ocupacionDiaServicioDto.getFechaConsulta(),ocupacionDiaServicioDto.getIdSedeFk()));
+        //System.out.println(ocupacionDtoList.toString());
+        List<CuartoDisponibleDto> cuartoDisponibleDtos = this.crearCuartosHora(ocupacionDiaServicioDto);
+        List<Integer> empleados = new ArrayList<>();
+        for (EmpleadosServicioDto s : empleadosServicioDtos) {
+            empleados = Stream.of(s.getIdEmpleadosFk(), empleados).flatMap(x -> x.stream()).collect(Collectors.toList());
+        }
+        empleados = empleados.stream().distinct().collect(Collectors.toList());
+
+
+        empleados.forEach((servicio)->{// 9{9,11,12), 13{12}
+
+
+            cuartoDisponibleDtos.forEach((cuarto)->{
+                int contadorOcupacion =0;
+
+                contadorOcupacion = (int) ocupacionDtoList.stream()
+                        .filter(ocupacionDto -> ocupacionDto.getHoraInicio().equals(cuarto.getCuarto()))
+                        .filter((ocupacionDto -> ocupacionDto.getIdEmpleadoFk().equals(servicio))).count();
+                System.out.println("contador ocupacion:"+contadorOcupacion+" en el cuarto: "+cuarto.getCuarto());
+                if(contadorOcupacion>0){
+                    cuarto.setDisponible(false);
+                }
+
+            });
+        });
+
+
+
+        ocupacionDiaServicioDto.setCuartoDisponibleDtos(cuartoDisponibleDtos);
+
+        return ocupacionDiaServicioDto;
+
+    }
+    
     public OcupacionDiaServicioDto getOcupacionDiaServicio(OcupacionDiaServicioDto ocupacionDiaServicioDto){
         List<EmpleadosServicioDto> empleadosServicioDtos = new ArrayList<>();
 
@@ -74,21 +122,121 @@ public class OcupacionFacade {
                 ocupacionService.buscarPorFechaYSede(ocupacionDiaServicioDto.getFechaConsulta(),ocupacionDiaServicioDto.getIdSedeFk()));
         //System.out.println(ocupacionDtoList.toString());
         List<CuartoDisponibleDto> cuartoDisponibleDtos = this.crearCuartosHora(ocupacionDiaServicioDto);
+        List<Integer> empleados = new ArrayList<>();
+        for (EmpleadosServicioDto s : empleadosServicioDtos) {
+            empleados = Stream.of(s.getIdEmpleadosFk(), empleados).flatMap(x -> x.stream()).collect(Collectors.toList());
+        }
+        empleados = empleados.stream().distinct().collect(Collectors.toList());
 
-        empleadosServicioDtos.forEach((servicio)->{// 9{9,11,12), 13{12}
-            Integer cantidadEmpleadosServicio = servicio.getIdEmpleadosFk().size();
+        CuartoDisponibleDto[][] matrizOcupacion = new CuartoDisponibleDto[50][empleados.size()+1];
+        
+        for (int i = 0; i <(empleados.size()+1) ; i++) {
+            CuartoDisponibleDto c = new CuartoDisponibleDto();
+
+            if((i+1)<(empleados.size()+1)){
+                c.setIdEmpleadoFk(empleados.get(i));
+                matrizOcupacion[0][i+1] = c;
+            }
+        }
+        
+        for(int i = 0; i < (cuartoDisponibleDtos.size()+1); i++){
+            CuartoDisponibleDto c = new CuartoDisponibleDto();
+
+            if((i+1)!=(cuartoDisponibleDtos.size()+1)){
+                c.setCuarto(cuartoDisponibleDtos.get(i).getCuarto());
+                matrizOcupacion[i+1][0]=c;
+            }
+        }
+
+        System.out.println("");
+
+
+        int indexCuartoHora=0;
+            for(Integer idEmpleado : empleados){
+                indexCuartoHora++;
+                for (int k = 1; k <(cuartoDisponibleDtos.size()+1) ; k++) {
+                    for(OcupacionDto o :ocupacionDtoList) {
+
+
+                        if (o.getIdEmpleadoFk().equals(idEmpleado) &&
+                                o.getHoraInicio().equals(matrizOcupacion[k][0].getCuarto())) {
+                            //esta ocupado
+
+                            for (int i = k; i < (cuartoDisponibleDtos.size() + 1); i++) {
+
+                                    CuartoDisponibleDto ca = new CuartoDisponibleDto();
+                                    ca.setDisponible(true);
+
+
+                                    if (!matrizOcupacion[i][0].getCuarto().equals(o.getHoraFinal())) {
+                                        ca.setDisponible(false);
+                                        matrizOcupacion[i][indexCuartoHora] = ca;
+                                    } else {
+                                        ca.setDisponible(false);
+                                        matrizOcupacion[i][indexCuartoHora] = ca;
+                                        i = i + (cuartoDisponibleDtos.size() + 1) + 4;
+                                    }
+
+                            }
+                        }
+                    }
+                }
+
+
+            }
+
+
+        for (int i = 0; i  <(cuartoDisponibleDtos.size()+1); i++) {
+            System.out.println();
+            for (int j = 0; j < (empleados.size()+1); j++) {
+                if((i==0)){
+                    if (j>0){
+                        System.out.print("e="+matrizOcupacion[i][j].getIdEmpleadoFk()+"**|");
+
+                    }else{
+                        if(matrizOcupacion[i][j]!=null){
+                            System.out.print(matrizOcupacion[i][j].isDisponible()+"|");
+
+                        }else{
+                            System.out.print("*****|");
+                        }
+                    }
+
+                }
+                if(i>0){
+                    if ((j==0)){
+                        System.out.print(matrizOcupacion[i][j].getCuarto()+"|");
+                    }else{
+                        if(matrizOcupacion[i][j]!=null){
+                            System.out.print(matrizOcupacion[i][j].isDisponible()+"|");
+
+                        }else{
+                            System.out.print("*****|");
+                        };
+                    }
+
+                }
+            }
+        }
+
+
+
+        /*empleados.forEach((servicio)->{// 9{9,11,12), 13{12}
+
 
             cuartoDisponibleDtos.forEach((cuarto)->{
                 int contadorOcupacion =0;
 
-                contadorOcupacion = (int) ocupacionDtoList.stream().filter(
-                        ocupacionDto -> ocupacionDto.getHoraInicio().equals(cuarto.getCuarto())).count();
+                contadorOcupacion = (int) ocupacionDtoList.stream()
+                        .filter(ocupacionDto -> ocupacionDto.getHoraInicio().equals(cuarto.getCuarto()))
+                        .filter((ocupacionDto -> ocupacionDto.getIdEmpleadoFk().equals(servicio))).count();
                 System.out.println("contador ocupacion:"+contadorOcupacion+" en el cuarto: "+cuarto.getCuarto());
-                if(contadorOcupacion==cantidadEmpleadosServicio){//si no hay disponibilidad
+                if(contadorOcupacion>0){
                     cuarto.setDisponible(false);
                 }
+
             });
-        });
+        });*/
 
 
 
