@@ -70,67 +70,27 @@ public class OcupacionFacade {
             empleadosServicioDtos.add(empleadosServicioDto);
         });
 
-        /*List<Integer> idEmpleados = new ArrayList<>();
-        empleadosServicioDtos.forEach(e->{
-            e.getIdEmpleadosFk().forEach(id->{
-                if (idEmpleados.isEmpty()){
-                    idEmpleados.add(id);
-                }else if(!idEmpleados.contains(id)){
-                    idEmpleados.add(id);
-                }
-            });
-        });*/
-
-        List<OcupacionDto> ocupacionDtoList = ocupacionMapper.toDto(ocupacionService.buscarPorFechaYSede(
-                ocupacionDiaServicioDto.getFechaConsulta(),
-                ocupacionDiaServicioDto.getIdSedeFk()));
-
-        /*List<OcupacionDto> ocupacionDtoList2 =new ArrayList<>();
-        for (Integer id : idEmpleados) {
-            for(OcupacionDto o: ocupacionDtoList){
-                if(o.getIdEmpleadoFk().equals(id)){
-                    ocupacionDtoList2.add(o);
-                }
-            }
-        }*/
-
+        List<OcupacionDto> ocupacionDtoList = ocupacionMapper.toDto(
+                ocupacionService.buscarPorFechaYSede(ocupacionDiaServicioDto.getFechaConsulta(),ocupacionDiaServicioDto.getIdSedeFk()));
+        //System.out.println(ocupacionDtoList.toString());
         List<CuartoDisponibleDto> cuartoDisponibleDtos = this.crearCuartosHora(ocupacionDiaServicioDto);
 
-        for (EmpleadosServicioDto servicio : empleadosServicioDtos) {// 9{9,11,12), 13{12}
-            int cantidadEmpleadosServicio = servicio.getIdEmpleadosFk().size();
+        empleadosServicioDtos.forEach((servicio)->{// 9{9,11,12), 13{12}
+            Integer cantidadEmpleadosServicio = servicio.getIdEmpleadosFk().size();
 
-            for (CuartoDisponibleDto cuarto : cuartoDisponibleDtos) {
-                int count = 0;
-                //aqui se debe recorrer son los empleados del servicio actual
-                List<Integer> idEmpleados = new ArrayList<>();
-                for (Integer id : servicio.getIdEmpleadosFk()) {
-                    if (idEmpleados.isEmpty()) {
-                        idEmpleados.add(id);
-                    } else if (!idEmpleados.contains(id)) {
-                        idEmpleados.add(id);
-                    }
-                }
+            cuartoDisponibleDtos.forEach((cuarto)->{
+                int contadorOcupacion =0;
 
-                List<OcupacionDto> ocupacionDtoList3 = new ArrayList<>();
-                for (Integer id : idEmpleados) {
-                    for(OcupacionDto o: ocupacionDtoList){
-                        if(o.getIdEmpleadoFk().equals(id)){
-                            ocupacionDtoList3.add(o);
-                        }
-                    }
-                }
-                for (OcupacionDto ocupacionDto : ocupacionDtoList3) {
-                    if (ocupacionDto.getHoraInicio().equals(cuarto.getCuarto())) {
-                        count++;
-                    }
-                }
-                int contadorOcupacion = count;
-
-                if (contadorOcupacion == cantidadEmpleadosServicio) {
+                contadorOcupacion = (int) ocupacionDtoList.stream().filter(
+                        ocupacionDto -> ocupacionDto.getHoraInicio().equals(cuarto.getCuarto())).count();
+                System.out.println("contador ocupacion:"+contadorOcupacion+" en el cuarto: "+cuarto.getCuarto());
+                if(contadorOcupacion==cantidadEmpleadosServicio){//si no hay disponibilidad
                     cuarto.setDisponible(false);
                 }
-            }
-        }
+            });
+        });
+
+
 
         ocupacionDiaServicioDto.setCuartoDisponibleDtos(cuartoDisponibleDtos);
 
@@ -159,6 +119,7 @@ public class OcupacionFacade {
             if(horaAnterior<0){
                 cuartoDto.setCuarto(hi);
                 cuartoDto.setDisponible(true);
+
                 cuartoDisponibleDtos.add(cuartoDto);
             }
             cuartoDto = new CuartoDisponibleDto();
@@ -166,11 +127,18 @@ public class OcupacionFacade {
             LocalTime before = cuartoDisponibleDtos.get(horaAnterior).getCuarto();
             cuartoDto.setCuarto(before.plusMinutes(15));
             cuartoDto.setDisponible(true);
+
+
             cuartoDisponibleDtos.add(cuartoDto);
+
             i=cuartoDisponibleDtos.get(horaAnterior+1).getCuarto();
         }
         return cuartoDisponibleDtos;
+
+
     }
+
+
 
     //todo buscar la ocupacion de un dia de una sede
     public OcupacionDiaDto getOcupacionDelDia(OcupacionDiaDto ocupacionDiaDto){
