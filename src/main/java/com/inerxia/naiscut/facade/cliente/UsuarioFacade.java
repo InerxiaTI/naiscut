@@ -68,6 +68,7 @@ public class UsuarioFacade extends Facade<UsuarioMapper, UsuarioService> impleme
 
 
     public UsuarioDto editarUsuario(UsuarioDto usuarioDto){
+
         return mapper.toDto(service.editarUsuario(mapper.toEntity(usuarioDto)));
     }
 

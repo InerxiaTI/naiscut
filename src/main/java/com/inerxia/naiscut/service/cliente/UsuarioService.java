@@ -16,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Service
 @Transactional
@@ -45,13 +47,11 @@ public class UsuarioService  {
         if(Objects.isNull(usuario.getId())){
             throw new ObjectNoEncontradoException("exception.objeto_no_encontrado");
         }
-
-        Usuario usuarioTx = usuarioRepository.findById(usuario.getId())
-                .orElseThrow(()-> new DataNotFoundException("exception.data_not_found.usuario"));
-
+        Logger.getLogger(UsuarioService.class.getName()).log(Level.INFO, usuario.getId().toString());
+        Usuario usuarioTx = this.findById(usuario.getId());
         usuarioTx.setUsuario(usuario.getUsuario());
         usuarioTx.setClave(usuario.getClave());
-        usuarioTx.setEstado(usuario.getEstado());
+        usuarioTx.setEstado(DataTypeHandler.charToBoolean(usuario.getEstado()) ? '1' : '0');
 
         return usuarioTx;
     }
