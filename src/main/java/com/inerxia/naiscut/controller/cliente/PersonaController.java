@@ -57,7 +57,7 @@ public class PersonaController {
             @ApiResponse(code = 400, message = "La petición es inválida"),
             @ApiResponse(code = 500, message = "Error del servidor al procesar la respuesta"),
     })
-    public ResponseEntity<StandardResponse<PersonaDto>> crearSede(@Valid @RequestBody PersonaDto personaDto){
+    public ResponseEntity<StandardResponse<PersonaDto>> crearPersona(@Valid @RequestBody PersonaDto personaDto){
         PersonaDto personaDto1 = personaFacade.crearPersona(personaDto);
         return ResponseEntity.ok(new StandardResponse<>(
                 StandardResponse.EstadoStandardResponse.OK,
@@ -72,7 +72,7 @@ public class PersonaController {
             @ApiResponse(code = 400, message = "La petición es inválida"),
             @ApiResponse(code = 500, message = "Error del servidor al procesar la respuesta"),
     })
-    public ResponseEntity<StandardResponse<PersonaDto>> editarSede(@Valid @RequestBody PersonaDto personaDto){
+    public ResponseEntity<StandardResponse<PersonaDto>> editarPersona(@Valid @RequestBody PersonaDto personaDto){
         PersonaDto personaDto1 = personaFacade.editarPersona(personaDto);
         return ResponseEntity.ok(new StandardResponse<>(
                 StandardResponse.EstadoStandardResponse.OK,

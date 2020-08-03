@@ -48,7 +48,7 @@ public class UsuarioController {
             @ApiResponse(code = 400, message = "La petición es inválida"),
             @ApiResponse(code = 500, message = "Error del servidor al procesar la respuesta"),
     })
-    public ResponseEntity<StandardResponse<RegistroPersonaDto>> crearSede(@Valid @RequestBody RegistroPersonaDto registroPersonaDto){
+    public ResponseEntity<StandardResponse<RegistroPersonaDto>> crearUsuario(@Valid @RequestBody RegistroPersonaDto registroPersonaDto){
         RegistroPersonaDto registroPersonaDto1 = usuarioFacade.registrarUsuario(registroPersonaDto);
         return ResponseEntity.ok(new StandardResponse<>(
                 StandardResponse.EstadoStandardResponse.OK,
@@ -63,7 +63,7 @@ public class UsuarioController {
             @ApiResponse(code = 400, message = "La petición es inválida"),
             @ApiResponse(code = 500, message = "Error del servidor al procesar la respuesta"),
     })
-    public ResponseEntity<StandardResponse<UsuarioDto>> editarSede(@Valid @RequestBody UsuarioDto usuarioDto){
+    public ResponseEntity<StandardResponse<UsuarioDto>> editarUsuario(@Valid @RequestBody UsuarioDto usuarioDto){
         try{
             UsuarioDto usuarioDto1 = usuarioFacade.editarUsuario(usuarioDto);
             return ResponseEntity.ok(new StandardResponse<>(

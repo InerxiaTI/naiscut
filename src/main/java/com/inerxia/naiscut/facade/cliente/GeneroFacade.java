@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Service
 @Transactional
@@ -32,7 +34,8 @@ public class GeneroFacade extends Facade<GeneroMapper, GeneroService> implements
 
     @Override
     public List<GeneroDto> findAll(Pageable pageable) {
-        return null;
+        Logger.getGlobal().log(Level.INFO, "Find All en genero. "+pageable.getPageSize()+" / "+pageable.getPageNumber() );
+        return mapper.toDto(service.findAll(pageable));
     }
 
 
