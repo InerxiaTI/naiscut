@@ -3,6 +3,7 @@ package com.inerxia.naiscut.facade.salon;
 import com.inerxia.naiscut.facade.empleado.EmpleadoFacade;
 import com.inerxia.naiscut.facade.mapper.SalonMapper;
 import com.inerxia.naiscut.facade.salon.dto.SalonDto;
+import com.inerxia.naiscut.facade.salon.dto.TipoSalonDto;
 import com.inerxia.naiscut.service.salon.SalonService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +32,11 @@ public class SalonFacade {
 
     public SalonDto findById(Integer id){
         return salonMapper.toDto(salonService.findById(id));
+    }
+
+    public String getTipoSalon(Integer idTipoSalon){
+        TipoSalonDto tipoSalonDto = tipoSalonFacade.findById(idTipoSalon);
+        return tipoSalonDto.getDescripcion();
     }
 
     public List<SalonDto> buscarPorNombre(String nombre){
