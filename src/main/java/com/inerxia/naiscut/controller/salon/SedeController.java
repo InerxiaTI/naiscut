@@ -4,6 +4,7 @@ import com.inerxia.naiscut.exception.DataConstraintViolationException;
 import com.inerxia.naiscut.facade.salon.SedeFacade;
 import com.inerxia.naiscut.facade.salon.dto.RegistroSalonDto;
 import com.inerxia.naiscut.facade.salon.dto.SedeDto;
+import com.inerxia.naiscut.facade.salon.dto.SedeSalonDto;
 import com.inerxia.naiscut.util.StandardResponse;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -37,6 +38,20 @@ public class SedeController {
         return ResponseEntity.ok(new StandardResponse<>(
                 StandardResponse.EstadoStandardResponse.OK,
                 sedeDto));
+    }
+
+    @GetMapping("/get-sedes-salon")
+    @ApiOperation(value = "Obtiene todas las sedes y su salón", response = List.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La petición fue procesada con éxito"),
+            @ApiResponse(code = 400, message = "La petición es inválida"),
+            @ApiResponse(code = 500, message = "Error del servidor al procesar la respuesta"),
+    })
+    public ResponseEntity<StandardResponse<List<SedeSalonDto>>> getSedesSalon(){
+        List<SedeSalonDto> sedeSalonDtoList = sedeFacade.getSedesSalon();
+        return ResponseEntity.ok(new StandardResponse<>(
+                StandardResponse.EstadoStandardResponse.OK,
+                sedeSalonDtoList));
     }
 
     @GetMapping("/get-por-salon/{idSalonFk}")

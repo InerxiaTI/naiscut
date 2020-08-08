@@ -15,7 +15,6 @@ public class SalonDto {
     @Size(max = 100)
     private String nombre;
 
-    @Size(max = 100)
     private String logo;
 
     private TipoSalonDto tipoSalonFk;

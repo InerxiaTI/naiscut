@@ -4,11 +4,14 @@ import com.inerxia.naiscut.facade.mapper.SedeMapper;
 import com.inerxia.naiscut.facade.salon.dto.RegistroSalonDto;
 import com.inerxia.naiscut.facade.salon.dto.SalonDto;
 import com.inerxia.naiscut.facade.salon.dto.SedeDto;
+import com.inerxia.naiscut.facade.salon.dto.SedeSalonDto;
 import com.inerxia.naiscut.service.salon.SedeService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional
@@ -27,6 +30,38 @@ public class SedeFacade {
 
     public SedeDto findById(Integer id){
         return sedeMapper.toDto(sedeService.findById(id));
+    }
+
+    public List<SedeSalonDto> getSedesSalon(){
+        List<SedeDto> sedeDtoList = sedeMapper.toDto(sedeService.findAll());
+        List<SedeSalonDto> sedeSalonDtoList = new ArrayList<>();
+        Integer idSalon=null;
+        String tipoSalon="";
+        SalonDto salonDto = new SalonDto();
+        for (SedeDto sede : sedeDtoList) {
+            idSalon = sede.getIdSalonFk();
+            if (Objects.isNull(salonDto.getId()) || !salonDto.getId().equals(idSalon)) {
+                salonDto = salonFacade.findById(sede.getIdSalonFk());
+                tipoSalon = salonFacade.getTipoSalon(salonDto.getIdTipoSalonFk());
+            }
+
+            SedeSalonDto sedeSalonDto = new SedeSalonDto(
+                    sede.getId(),
+                    sede.getDescripcion(),
+                    sede.getCiudad(),
+                    sede.getDireccion(),
+                    sede.getTelefono(),
+                    sede.getDomicilio(),
+                    sede.getPrincipal(),
+                    sede.getEstadoSede(),
+                    salonDto.getNit(),
+                    salonDto.getNombre(),
+                    salonDto.getLogo(),
+                    tipoSalon
+            );
+            sedeSalonDtoList.add(sedeSalonDto);
+        }
+        return sedeSalonDtoList;
     }
 
     public List<SedeDto> buscarPorSalon(Integer idSalonFk){

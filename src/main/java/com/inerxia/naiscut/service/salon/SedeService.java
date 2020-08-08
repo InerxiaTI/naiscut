@@ -32,6 +32,14 @@ public class SedeService {
         return sedeRepository.findById(id).orElseThrow(()-> new DataNotFoundException("exception.data_not_found.sede"));
     }
 
+    public List<Sede> findAll(){
+        List<Sede> sedeList = sedeRepository.findAll();
+        if (sedeList.isEmpty()){
+            throw new DataNotFoundException("exception.data_not_found.sede");
+        }
+        return sedeList;
+    }
+
     public List<Sede> buscarPorSalon(Integer idSalonFk){
         if(Objects.isNull(idSalonFk)){
             throw new ObjectNoEncontradoException("exception.objeto_no_encontrado");
