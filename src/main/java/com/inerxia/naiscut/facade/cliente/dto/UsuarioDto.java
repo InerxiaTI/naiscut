@@ -14,12 +14,14 @@ public class UsuarioDto {
     private String clave;
 
     private PersonaDto personaFk;
+    private RolDto rolFk;
 
     @NotNull
     @Size(max = 1)
     private char estado;
 
     private Integer idPersonaFk;
+    private Integer idRolFk;
 
     public Integer getId() {
         return id;
@@ -69,5 +71,19 @@ public class UsuarioDto {
         this.idPersonaFk = idPersonaFk;
     }
 
+    public RolDto getRolFk() {
+        return rolFk;
+    }
 
+    public void setRolFk(RolDto rolFk) {
+        this.rolFk = rolFk;
+    }
+
+    public Integer getIdRolFk() {
+        return idRolFk;
+    }
+
+    public void setIdRolFk(Integer idRolFk) {
+        this.idRolFk = idRolFk;
+    }
 }

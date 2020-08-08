@@ -10,9 +10,17 @@ import com.inerxia.naiscut.util.DataTypeHandler;
 import org.hibernate.ObjectNotFoundException;
 
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -21,8 +29,9 @@ import java.util.logging.Logger;
 
 @Service
 @Transactional
-public class UsuarioService  {
+public class UsuarioService implements UserDetailsService {
     private UsuarioRepository usuarioRepository;
+
 
     public UsuarioService(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
@@ -42,6 +51,8 @@ public class UsuarioService  {
             throw new DataConstraintViolationException("exception.data_constraint_violation.usuario");
         }
     }
+
+
 
     public Usuario editarUsuario(Usuario usuario){
         if(Objects.isNull(usuario.getId())){
@@ -64,6 +75,23 @@ public class UsuarioService  {
                 .orElseThrow(()-> new DataNotFoundException("exception.data_not_found.usuario"));
     }
 
+    public Usuario findByUsuario(String user){
+        if(Objects.isNull(user)){
+            throw new ObjectNotFoundException(user, "exception.objeto_no_encontrado");
+        }
+        return usuarioRepository.findByUsuario(user)
+                .orElseThrow(()-> new DataNotFoundException("exception.data_not_found.usuario"));
+    }
 
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Usuario usuario = this.findByUsuario(username);
+        List<GrantedAuthority> roles = new ArrayList<>();
+        roles.add(new SimpleGrantedAuthority(usuario.getRolFk().getDescripcion()));
 
+        return new User(usuario.getUsuario(), usuario.getClave(),
+                DataTypeHandler.charToBoolean(usuario.getEstado()),
+                true,true,true,roles);
+    }
 }

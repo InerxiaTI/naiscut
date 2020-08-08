@@ -25,7 +25,7 @@ public class SwaggerConfiguration {
                 .apiInfo(usersApiInfo())
                 .select()
                 .paths(PathSelectors.any())
-                .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("com.inerxia.naiscut.controller"))
                 .build();
     }
 

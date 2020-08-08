@@ -20,6 +20,12 @@ public class Usuario {
     private Persona personaFk;
     @Column(name = "ESTADO", nullable = false)
     private char estado;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ROL_ID_FK",insertable = false, updatable = false)
+    private Rol rolFk;
+
+    @Column(name="ROL_ID_FK",  nullable = false)
+    private Integer idRolFk;
 
     @Column(name="PERSONA_FK",  nullable = false)
     private Integer idPersonaFk;
@@ -70,5 +76,21 @@ public class Usuario {
 
     public void setIdPersonaFk(Integer idPersonaFk) {
         this.idPersonaFk = idPersonaFk;
+    }
+
+    public Rol getRolFk() {
+        return rolFk;
+    }
+
+    public void setRolFk(Rol rolFk) {
+        this.rolFk = rolFk;
+    }
+
+    public Integer getIdRolFk() {
+        return idRolFk;
+    }
+
+    public void setIdRolFk(Integer idRolFk) {
+        this.idRolFk = idRolFk;
     }
 }

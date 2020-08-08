@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -21,9 +22,11 @@ import javax.validation.Valid;
 @RequestMapping("/usuario")
 public class UsuarioController {
     private UsuarioFacade usuarioFacade;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UsuarioController(UsuarioFacade usuarioFacade) {
+    public UsuarioController(UsuarioFacade usuarioFacade,  BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.usuarioFacade = usuarioFacade;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @GetMapping("/get-por-id/{id}")
@@ -49,6 +52,7 @@ public class UsuarioController {
             @ApiResponse(code = 500, message = "Error del servidor al procesar la respuesta"),
     })
     public ResponseEntity<StandardResponse<RegistroPersonaDto>> crearUsuario(@Valid @RequestBody RegistroPersonaDto registroPersonaDto){
+        registroPersonaDto.getUsuarioDto().setClave(bCryptPasswordEncoder.encode( registroPersonaDto.getUsuarioDto().getClave()));
         RegistroPersonaDto registroPersonaDto1 = usuarioFacade.registrarUsuario(registroPersonaDto);
         return ResponseEntity.ok(new StandardResponse<>(
                 StandardResponse.EstadoStandardResponse.OK,
